@@ -1,0 +1,180 @@
+{
+  "source_file": "/app/input/1787391629.json",
+  "summary": {
+    "total": 13,
+    "triggered": 6
+  },
+  "sessions": [
+    {
+      "group_name": "260818ZM精致河南省郑州市中牟县大孟镇融创观澜壹号三期6-2-1102",
+      "triggered": true,
+      "trigger_type": "construction_timeout",
+      "responses": [
+        {
+          "at_target": [
+            "@销售"
+          ],
+          "content": "师傅可能正在工作，我们已经提醒师傅尽快联系您~",
+          "generated_by": "llm"
+        }
+      ],
+      "llm_judge": {
+        "trigger": "construction_timeout",
+        "reason": "客户发送了'主卧，客厅，儿童房，次卧'等现场施工/上门作业区域相关内容，且后续聊天记录中无工作人员回应。"
+      }
+    },
+    {
+      "group_name": "260819W 精致母婴W上海闵行区浦锦",
+      "triggered": false,
+      "trigger_type": null,
+      "responses": [],
+      "llm_judge": {
+        "trigger": "none"
+      }
+    },
+    {
+      "group_name": "260819ZM工装精致四川省成都市成华",
+      "triggered": true,
+      "trigger_type": "appointment_timeout",
+      "responses": [
+        {
+          "at_target": [
+            "@师傅"
+          ],
+          "content": "师傅可能正在工作，我们已经提醒师傅尽快联系您~",
+          "generated_by": "llm"
+        }
+      ],
+      "llm_judge": {
+        "trigger": "appointment_timeout",
+        "reason": "客户最后一条消息'有变动，先暂停哈'涉及预约/上门时间的变动，且该消息之后无任何工作人员回应，符合appointment_timeout触发条件"
+      }
+    },
+    {
+      "group_name": "260820ZM 精致上海国贸虹桥璟上云河璟庭4幢6号801",
+      "triggered": true,
+      "trigger_type": "appointment_timeout",
+      "responses": [
+        {
+          "at_target": [
+            "@师傅"
+          ],
+          "content": "师傅可能正在工作，我们已经提醒师傅尽快联系您~",
+          "generated_by": "llm"
+        }
+      ],
+      "llm_judge": {
+        "trigger": "appointment_timeout",
+        "reason": "客户发送确认保洁上门时间相关内容，且之后无工作人员回应（后续消息发送者'室内空气治理'角色标注为客户，非工作人员）"
+      }
+    },
+    {
+      "group_name": "260820ZM 精致北京市西城区马连道东街甲2号院2号楼1502",
+      "triggered": false,
+      "trigger_type": null,
+      "responses": [],
+      "llm_judge": {
+        "trigger": "none"
+      }
+    },
+    {
+      "group_name": "260822W精致母婴W海淀区太阳园6号楼东",
+      "triggered": true,
+      "trigger_type": "appointment_timeout",
+      "responses": [
+        {
+          "at_target": [
+            "@师傅"
+          ],
+          "content": "师傅可能正在工作，我们已经提醒师傅尽快联系您~",
+          "generated_by": "llm"
+        }
+      ],
+      "llm_judge": {
+        "trigger": "appointment_timeout",
+        "reason": "客户孙振龙发送了确认上门时间的消息（暂定上午8点半），且该消息之后没有工作人员的后续回应。"
+      }
+    },
+    {
+      "group_name": "8.18高端北京市门头沟区京能西山印",
+      "triggered": false,
+      "trigger_type": null,
+      "responses": [],
+      "llm_judge": {
+        "trigger": "none"
+      }
+    },
+    {
+      "group_name": "8.25高端 北京市西城区阳光丽景北",
+      "triggered": false,
+      "trigger_type": null,
+      "responses": [],
+      "llm_judge": {
+        "trigger": "none"
+      }
+    },
+    {
+      "group_name": "LR26.8.18 精致 丰台区钟萃路 3 号院 2号楼2单元1301",
+      "triggered": true,
+      "trigger_type": "appointment_timeout",
+      "responses": [
+        {
+          "at_target": [
+            "@师傅"
+          ],
+          "content": "师傅可能正在工作，我们已经提醒师傅尽快联系您~",
+          "generated_by": "llm"
+        }
+      ],
+      "llm_judge": {
+        "trigger": "appointment_timeout",
+        "reason": "最后一条消息由客户lth发出，内容为'到了'，属于上门到达相关内容。该消息之后无任何工作人员回应（除醛师霍建顺虽名字像工作人员，但角色标注为customer，不算工作人员回应），符合appointment_timeout触发条件。"
+      }
+    },
+    {
+      "group_name": "LR26.8.19精致 西城区东绒线胡同54号院内106室",
+      "triggered": false,
+      "trigger_type": null,
+      "responses": [],
+      "llm_judge": {
+        "trigger": "none"
+      }
+    },
+    {
+      "group_name": "LR26.8.22 精致 河北省承德市双桥区鼎峰·中瑞城38号楼2单元303",
+      "triggered": true,
+      "trigger_type": "appointment_timeout",
+      "responses": [
+        {
+          "at_target": [
+            "@师傅"
+          ],
+          "content": "师傅可能正在工作，我们已经提醒师傅尽快联系您~",
+          "generated_by": "llm"
+        }
+      ],
+      "llm_judge": {
+        "trigger": "appointment_timeout",
+        "reason": "客户李晓建在17:41:45发送确认上门时间相关内容（'22号上午11点左右我可以到'），之后仅有其他客户茱丽.耶回复'好的，没问题'，无工作人员回应，符合appointment_timeout触发条件。"
+      }
+    },
+    {
+      "group_name": "LR26.8.23 高端 朝阳区小红门路朝阳·中建星光里5号楼1单元1702",
+      "triggered": false,
+      "trigger_type": null,
+      "responses": [],
+      "llm_judge": {
+        "trigger": "none"
+      }
+    },
+    {
+      "group_name": "企业微信团队",
+      "triggered": false,
+      "trigger_type": null,
+      "responses": [],
+      "llm_judge": {
+        "trigger": "none"
+      }
+    }
+  ]
+}

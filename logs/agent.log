@@ -1,0 +1,1000 @@
+2026-08-22 17:02:03 | INFO    | src.llm.llm_client | LLM配置加载完成: enabled=True provider=openai_compatible model=qwen3.7-plus base_url=https://dashscope.aliyuncs.com/compatible-mode/v1 api_key=已配置 temperature=0.5 max_tokens=512 timeout=30s retries=2
+2026-08-22 17:02:03 | DEBUG   | asyncio | Using proactor: IocpProactor
+2026-08-22 17:02:03 | INFO    | src.core.export_parser | 解析会话[DEBUG日志验证-预约]: 有效文本消息1条 角色分布={'customer': 1} 未获响应1条
+2026-08-22 17:02:03 | INFO    | src.main | 会话[DEBUG日志验证-预约] 触发: type=appointment_timeout intent=appointment score=7.0 触发消息=哦，忘了，我明天上午有事，十点以后可以吗？
+2026-08-22 17:02:03 | DEBUG   | src.main | 会话[DEBUG日志验证-预约] 生成响应: triggered=True responses=1条
+2026-08-22 17:02:03 | INFO    | src.main | 会话[DEBUG日志验证-预约] 进入LLM判定路径: 规则引擎预判=appointment_timeout 消息1条
+2026-08-22 17:02:03 | DEBUG   | src.main | 会话[DEBUG日志验证-预约] 提交LLM的全量对话记录: [2026-08-22 13:00:00] 客户调试(customer): 哦，忘了，我明天上午有事，十点以后可以吗？
+2026-08-22 17:02:03 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息1条 对话记录长度=59字符
+2026-08-22 17:02:03 | DEBUG   | src.llm.llm_client | LLM判定完整prompt(共694字符): 你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含多个"字段：值"的订单信息(带冒号的一长串, 如上门时间/姓名/电话/地址等字段)\n2. appointment_timeout: 客户发送预约上门/改期/确认上门时间相关内容, 且该消息之后无人回应\n3. contract_timeout: 客户发送合同/签约/个人信息填写相关内容, 且该消息之后无人回应\n4. construction_timeout: 客户发送现场施工/上门作业/入住准备相关内容, 且该消息之后无人回应\n5. medication_timeout: 客户发送药剂/甲醛/气味/安全担忧相关内容, 且该消息之后无人回应\n\n判断要求:\n- "无人回应"指: 该客户消息之后的聊天记录中, 没有其他成员的后续消息\n- 客户诉求已被工作人员回应、或对话已达成一致/结束确认(如回复"好""可以""知道了"等), 判为 none\n- 闲聊/致谢/无关内容, 判为 none\n- 消息中括号内角色为系统预推断, 可能不准; 请结合内容判断工作人员与客户(安排上门、提供说明、提醒注意事项的一方是工作人员)\n\n只输出JSON，格式: {"trigger": "...", "reason": "简短判断依据"}\n聊天记录:\n[2026-08-22 13:00:00] 客户调试(customer): 哦，忘了，我明天上午有事，十点以后可以吗？
+2026-08-22 17:02:03 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共711字符)
+2026-08-22 17:02:03 | DEBUG   | src.llm.llm_client | LLM请求payload详情(异步): model=qwen3.7-plus temperature=0.5 max_tokens=512 messages=[{"role": "user", "content": "你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含多个\"字段：值\"的订单信息(带冒号的一长串, 如上门时间/姓名/电话/地址等字段)\n2. appointment_timeout: 客户发送预约上门/改期/确认上门时间相关内容, 且该消息之后无人回应\n3. contract_timeout: 客户发送合同/签约/个人信息填写相关内容, 且该消息之后无人回应\n4. construction_timeout: 客户发送现场施工/上门作业/入住准备相关内容, 且该消息之后无人回应\n5. medication_timeout: 客户发送药剂/甲醛/气味/安全担忧相关内容, 且该消息之后无人回应\n\n判断要求:\n- \"无人回应\"指: 该客户消息之后的聊天记录中, 没有其他成员的后续消息\n- 客户诉求已被工作人员回应、或对话已达成一致/结束确认(如回复\"好\"\"可以\"\"知道了\"等), 判为 none\n- 闲聊/致谢/无关内容, 判为 none\n- 消息中括号内角色为系统预推断, 可能不准; 请结合内容判断工作人员与客户(安排上门、提供说明、提醒注意事项的一方是工作人员)\n\n只输出JSON，格式: {\"trigger\": \"...\", \"reason\": \"简短判断依据\"}\n聊天记录:\n[2026-08-22 13:00:00] 客户调试(customer): 哦，忘了，我明天上午有事，十点以后可以吗？"}]
+2026-08-22 17:02:03 | DEBUG   | httpcore.connection | connect_tcp.started host='127.0.0.1' port=7897 local_address=None timeout=30 socket_options=None
+2026-08-22 17:02:03 | DEBUG   | httpcore.connection | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000200CF1E3470>
+2026-08-22 17:02:03 | DEBUG   | httpcore.http11 | send_request_headers.started request=<Request [b'CONNECT']>
+2026-08-22 17:02:03 | DEBUG   | httpcore.http11 | send_request_headers.complete
+2026-08-22 17:02:03 | DEBUG   | httpcore.http11 | send_request_body.started request=<Request [b'CONNECT']>
+2026-08-22 17:02:03 | DEBUG   | httpcore.http11 | send_request_body.complete
+2026-08-22 17:02:03 | DEBUG   | httpcore.http11 | receive_response_headers.started request=<Request [b'CONNECT']>
+2026-08-22 17:02:03 | DEBUG   | httpcore.http11 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'Connection established', [])
+2026-08-22 17:02:03 | DEBUG   | httpcore.proxy | start_tls.started ssl_context=<ssl.SSLContext object at 0x00000200CF1E8E50> server_hostname='dashscope.aliyuncs.com' timeout=30
+2026-08-22 17:02:03 | DEBUG   | httpcore.proxy | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000200CF1E34A0>
+2026-08-22 17:02:03 | DEBUG   | httpcore.http11 | send_request_headers.started request=<Request [b'POST']>
+2026-08-22 17:02:03 | DEBUG   | httpcore.http11 | send_request_headers.complete
+2026-08-22 17:02:03 | DEBUG   | httpcore.http11 | send_request_body.started request=<Request [b'POST']>
+2026-08-22 17:02:03 | DEBUG   | httpcore.http11 | send_request_body.complete
+2026-08-22 17:02:03 | DEBUG   | httpcore.http11 | receive_response_headers.started request=<Request [b'POST']>
+2026-08-22 17:02:08 | DEBUG   | httpcore.http11 | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'vary', b'Origin,Access-Control-Request-Method,Access-Control-Request-Headers, Accept-Encoding'), (b'x-request-id', b'948d437b-5bac-91a5-8648-adc360fc48fe'), (b'x-dashscope-call-gateway', b'true'), (b'x-dashscope-finished', b'true'), (b'x-dashscope-timeout', b'3600'), (b'content-type', b'application/json'), (b'req-cost-time', b'5371'), (b'req-arrive-time', b'1787389323260'), (b'resp-start-time', b'1787389328631'), (b'x-envoy-upstream-service-time', b'5370'), (b'content-encoding', b'gzip'), (b'date', b'Sat, 22 Aug 2026 09:02:08 GMT'), (b'server', b'istio-envoy'), (b'transfer-encoding', b'chunked')])
+2026-08-22 17:02:08 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:02:08 | DEBUG   | httpcore.http11 | receive_response_body.started request=<Request [b'POST']>
+2026-08-22 17:02:08 | DEBUG   | httpcore.http11 | receive_response_body.complete
+2026-08-22 17:02:08 | DEBUG   | httpcore.http11 | response_closed.started
+2026-08-22 17:02:08 | DEBUG   | httpcore.http11 | response_closed.complete
+2026-08-22 17:02:08 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=5623ms 响应长度=103字符
+2026-08-22 17:02:08 | DEBUG   | src.llm.llm_client | LLM响应原始内容(异步): {\n  "trigger": "appointment_timeout",\n  "reason": "客户询问明天上午十点以后是否可以上门，属于预约/改期上门时间相关内容，且该消息之后无工作人员回应。"\n}
+2026-08-22 17:02:08 | DEBUG   | src.llm.llm_client | LLM判定模型原始输出: {\n  "trigger": "appointment_timeout",\n  "reason": "客户询问明天上午十点以后是否可以上门，属于预约/改期上门时间相关内容，且该消息之后无工作人员回应。"\n}
+2026-08-22 17:02:08 | DEBUG   | src.llm.llm_client | LLM判定JSON解析结果: {'trigger': 'appointment_timeout', 'reason': '客户询问明天上午十点以后是否可以上门，属于预约/改期上门时间相关内容，且该消息之后无工作人员回应。'}
+2026-08-22 17:02:08 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=appointment_timeout 判定耗时=5698ms 依据=客户询问明天上午十点以后是否可以上门，属于预约/改期上门时间相关内容，且该消息之后无工作人员回应。
+2026-08-22 17:02:08 | INFO    | src.main | 会话[DEBUG日志验证-预约] 应用LLM判定响应: trigger=appointment_timeout 响应1条 at=['@师傅'] reply=师傅可能正在工作，我们已经提醒师傅尽快联系您~
+2026-08-22 17:02:08 | DEBUG   | src.main | 会话[DEBUG日志验证-预约] LLM判定完整结果: {'trigger': 'appointment_timeout', 'reason': '客户询问明天上午十点以后是否可以上门，属于预约/改期上门时间相关内容，且该消息之后无工作人员回应。'} 完整响应: [{'at_target': ['@师傅'], 'content': '师傅可能正在工作，我们已经提醒师傅尽快联系您~', 'generated_by': 'llm'}]
+2026-08-22 17:03:49 | INFO    | src.api.app | 服务启动: input_dir=/app/input output_dir=/app/output watcher.enabled=True
+2026-08-22 17:03:49 | INFO    | src.llm.llm_client | LLM配置加载完成: enabled=True provider=openai_compatible model=qwen3.7-plus base_url=https://dashscope.aliyuncs.com/compatible-mode/v1 api_key=已配置 temperature=0.5 max_tokens=512 timeout=30s retries=2
+2026-08-22 17:03:49 | INFO    | src.api.app | 输入文件夹监听已启动: /app/input -> http://127.0.0.1:8000
+2026-08-22 17:03:49 | INFO    | src.watcher | 开始监听输入文件夹: /app/input (间隔 2.0s)
+2026-08-22 17:04:33 | INFO    | src.watcher | 本轮扫描发现1个待处理文件: ['1787389187.json']
+2026-08-22 17:04:33 | INFO    | src.api.app | 收到开始任务请求: input_file=/app/input/1787389187.json
+2026-08-22 17:04:33 | INFO    | src.api.task_manager | 任务已创建: task_id=8bdd957bbc20 来源=/app/input/1787389187.json
+2026-08-22 17:04:33 | INFO    | src.api.task_manager | 任务开始执行: task_id=8bdd957bbc20 来源=/app/input/1787389187.json
+2026-08-22 17:04:33 | INFO    | src.main | 开始异步处理文件: /app/input/1787389187.json
+2026-08-22 17:04:33 | INFO    | httpx | HTTP Request: POST http://127.0.0.1:8000/api/tasks "HTTP/1.1 202 Accepted"
+2026-08-22 17:04:33 | INFO    | src.watcher | 发现新文件 1787389187.json -> 已开始任务 task_id=8bdd957bbc20
+2026-08-22 17:04:33 | INFO    | src.watcher | 文件已提交并记录状态: 1787389187.json (13501字节)
+2026-08-22 17:04:33 | INFO    | src.core.export_parser | 解析会话[260822W精致母婴W海淀区太阳园6号楼东]: 有效文本消息16条 角色分布={'customer': 16} 未获响应1条
+2026-08-22 17:04:33 | INFO    | src.core.export_parser | 解析会话[Poplar 杨]: 有效文本消息1条 角色分布={'internal': 1} 未获响应1条
+2026-08-22 17:04:33 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] 进入LLM判定路径: 规则引擎预判=未触发 消息16条
+2026-08-22 17:04:33 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息16条 对话记录长度=675字符
+2026-08-22 17:04:33 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1342字符)
+2026-08-22 17:04:44 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:04:44 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=10206ms 响应长度=116字符
+2026-08-22 17:04:44 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=10207ms) 依据=客户发送了关于明天上门开窗的预约相关内容，但随后小医回复了'好的'表示确认，客户诉求已被工作人员回应，对话已达成一致，因此不触发任何超时类别。
+2026-08-22 17:04:44 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:04:44 | INFO    | src.main | 会话[Poplar 杨] 进入LLM判定路径: 规则引擎预判=未触发 消息1条
+2026-08-22 17:04:44 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息1条 对话记录长度=58字符
+2026-08-22 17:04:44 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共710字符)
+2026-08-22 17:04:50 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:04:50 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=6840ms 响应长度=65字符
+2026-08-22 17:04:50 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=6842ms) 依据=聊天记录中仅包含一个链接，无客户诉求或订单信息，未触发任何条件。
+2026-08-22 17:04:50 | INFO    | src.main | 会话[Poplar 杨] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:04:50 | INFO    | src.main | 文件处理完成: /app/input/1787389187.json 耗时=17072ms
+2026-08-22 17:04:50 | INFO    | src.api.task_manager | 任务结果已落盘: task_id=8bdd957bbc20 -> /app/output/1787389187_result.json
+2026-08-22 17:04:50 | INFO    | src.api.task_manager | 任务执行成功: task_id=8bdd957bbc20 耗时=17084ms summary={'total': 2, 'triggered': 0} output=/app/output/1787389187_result.json
+2026-08-22 17:06:40 | INFO    | src.watcher | 本轮扫描发现1个待处理文件: ['list2.json']
+2026-08-22 17:06:40 | INFO    | src.api.app | 收到开始任务请求: input_file=/app/input/list2.json
+2026-08-22 17:06:40 | INFO    | src.api.task_manager | 任务已创建: task_id=c39dd3f6b075 来源=/app/input/list2.json
+2026-08-22 17:06:40 | INFO    | src.api.task_manager | 任务开始执行: task_id=c39dd3f6b075 来源=/app/input/list2.json
+2026-08-22 17:06:40 | INFO    | src.main | 开始异步处理文件: /app/input/list2.json
+2026-08-22 17:06:40 | INFO    | httpx | HTTP Request: POST http://127.0.0.1:8000/api/tasks "HTTP/1.1 202 Accepted"
+2026-08-22 17:06:40 | INFO    | src.watcher | 发现新文件 list2.json -> 已开始任务 task_id=c39dd3f6b075
+2026-08-22 17:06:40 | INFO    | src.watcher | 文件已提交并记录状态: list2.json (90字节)
+2026-08-22 17:06:40 | INFO    | src.main | 文件处理完成: /app/input/list2.json 耗时=20ms
+2026-08-22 17:06:40 | INFO    | src.api.task_manager | 任务结果已落盘: task_id=c39dd3f6b075 -> /app/output/list2_result.json
+2026-08-22 17:06:40 | INFO    | src.api.task_manager | 任务执行成功: task_id=c39dd3f6b075 耗时=39ms summary=(传统格式单会话) output=/app/output/list2_result.json
+2026-08-22 17:08:48 | INFO    | src.watcher | 本轮扫描发现1个待处理文件: ['1787389678.json']
+2026-08-22 17:08:48 | INFO    | src.api.app | 收到开始任务请求: input_file=/app/input/1787389678.json
+2026-08-22 17:08:48 | INFO    | src.api.task_manager | 任务已创建: task_id=f934abc33322 来源=/app/input/1787389678.json
+2026-08-22 17:08:48 | INFO    | src.api.task_manager | 任务开始执行: task_id=f934abc33322 来源=/app/input/1787389678.json
+2026-08-22 17:08:48 | INFO    | src.main | 开始异步处理文件: /app/input/1787389678.json
+2026-08-22 17:08:48 | INFO    | httpx | HTTP Request: POST http://127.0.0.1:8000/api/tasks "HTTP/1.1 202 Accepted"
+2026-08-22 17:08:48 | INFO    | src.watcher | 发现新文件 1787389678.json -> 已开始任务 task_id=f934abc33322
+2026-08-22 17:08:48 | INFO    | src.watcher | 文件已提交并记录状态: 1787389678.json (13467字节)
+2026-08-22 17:08:48 | INFO    | src.core.export_parser | 解析会话[260822W精致母婴W海淀区太阳园6号楼东]: 有效文本消息16条 角色分布={'customer': 16} 未获响应1条
+2026-08-22 17:08:48 | INFO    | src.core.export_parser | 解析会话[Poplar 杨]: 有效文本消息1条 角色分布={'internal': 1} 未获响应1条
+2026-08-22 17:08:48 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] 进入LLM判定路径: 规则引擎预判=未触发 消息16条
+2026-08-22 17:08:48 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息16条 对话记录长度=675字符
+2026-08-22 17:08:48 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1342字符)
+2026-08-22 17:09:00 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:09:00 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=11211ms 响应长度=118字符
+2026-08-22 17:09:00 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=11213ms) 依据=客户孙振龙发送'明天这个时候过来开窗'属于上门相关内容，但随后小医（工作人员）回复了'好的'进行确认回应，客户诉求已被工作人员响应，故判为none
+2026-08-22 17:09:00 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:09:00 | INFO    | src.main | 会话[Poplar 杨] 进入LLM判定路径: 规则引擎预判=未触发 消息1条
+2026-08-22 17:09:00 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息1条 对话记录长度=58字符
+2026-08-22 17:09:00 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共710字符)
+2026-08-22 17:09:07 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:09:07 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=7172ms 响应长度=68字符
+2026-08-22 17:09:07 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=7173ms) 依据=消息由工作人员发送，内容仅为一个链接，无客户诉求，不符合任何触发条件。
+2026-08-22 17:09:07 | INFO    | src.main | 会话[Poplar 杨] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:09:07 | INFO    | src.main | 文件处理完成: /app/input/1787389678.json 耗时=18415ms
+2026-08-22 17:09:07 | INFO    | src.api.task_manager | 任务结果已落盘: task_id=f934abc33322 -> /app/output/1787389678_result.json
+2026-08-22 17:09:07 | INFO    | src.api.task_manager | 任务执行成功: task_id=f934abc33322 耗时=18432ms summary={'total': 2, 'triggered': 0} output=/app/output/1787389678_result.json
+2026-08-22 17:12:51 | INFO    | src.api.app | 服务启动: input_dir=/app/input output_dir=/app/output watcher.enabled=True
+2026-08-22 17:12:51 | INFO    | src.llm.llm_client | LLM配置加载完成: enabled=True provider=openai_compatible model=qwen3.7-plus base_url=https://dashscope.aliyuncs.com/compatible-mode/v1 api_key=已配置 temperature=0.5 max_tokens=512 timeout=30s retries=2
+2026-08-22 17:12:51 | INFO    | src.api.app | 输入文件夹监听已启动: /app/input -> http://127.0.0.1:8000
+2026-08-22 17:12:51 | INFO    | src.watcher | 开始监听输入文件夹: /app/input (间隔 2.0s)
+2026-08-22 17:13:01 | INFO    | src.api.app | 收到开始任务请求: input_file=1787389678.json
+2026-08-22 17:13:01 | INFO    | src.api.task_manager | 任务已创建: task_id=1ff1449a488d 来源=1787389678.json
+2026-08-22 17:13:01 | INFO    | src.api.task_manager | 任务开始执行: task_id=1ff1449a488d 来源=1787389678.json
+2026-08-22 17:13:01 | INFO    | src.main | 开始异步处理文件: /app/input/1787389678.json
+2026-08-22 17:13:01 | INFO    | src.core.export_parser | 解析会话[260822W精致母婴W海淀区太阳园6号楼东]: 有效文本消息16条 显式role标注16条 角色分布={'customer': 16} 未获响应1条
+2026-08-22 17:13:01 | INFO    | src.core.export_parser | 解析会话[Poplar 杨]: 有效文本消息1条 显式role标注1条 角色分布={'customer': 1} 未获响应1条
+2026-08-22 17:13:01 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] 进入LLM判定路径: 规则引擎预判=未触发 消息16条
+2026-08-22 17:13:01 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息16条 对话记录长度=675字符
+2026-08-22 17:13:01 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1357字符)
+2026-08-22 17:13:16 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:13:16 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=14895ms 响应长度=85字符
+2026-08-22 17:13:16 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=14931ms) 依据=客户发送了确认上门时间相关内容，但后续已有成员回复“好的”进行回应和确认，不满足“无人回应”的触发条件。
+2026-08-22 17:13:16 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:13:16 | INFO    | src.main | 会话[Poplar 杨] 进入LLM判定路径: 规则引擎预判=未触发 消息1条
+2026-08-22 17:13:16 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息1条 对话记录长度=58字符
+2026-08-22 17:13:16 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共725字符)
+2026-08-22 17:13:20 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:13:20 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=4204ms 响应长度=60字符
+2026-08-22 17:13:20 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=4206ms) 依据=客户仅发送了一个链接，属于无关内容，无明确的业务诉求。
+2026-08-22 17:13:20 | INFO    | src.main | 会话[Poplar 杨] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:13:20 | INFO    | src.main | 文件处理完成: /app/input/1787389678.json 耗时=19158ms
+2026-08-22 17:13:20 | INFO    | src.api.task_manager | 任务结果已落盘: task_id=1ff1449a488d -> /app/output/1787389678_result.json
+2026-08-22 17:13:20 | INFO    | src.api.task_manager | 任务执行成功: task_id=1ff1449a488d 耗时=19175ms summary={'total': 2, 'triggered': 0} output=/app/output/1787389678_result.json
+2026-08-22 17:22:11 | INFO    | src.api.app | 服务启动: input_dir=/app/input output_dir=/app/output watcher.enabled=True
+2026-08-22 17:22:11 | INFO    | src.llm.llm_client | LLM配置加载完成: enabled=True provider=openai_compatible model=qwen3.7-plus base_url=https://dashscope.aliyuncs.com/compatible-mode/v1 api_key=已配置 temperature=0.5 max_tokens=512 timeout=30s retries=2
+2026-08-22 17:22:11 | INFO    | src.api.app | 输入文件夹监听已启动: /app/input -> http://127.0.0.1:8000
+2026-08-22 17:22:11 | INFO    | src.watcher | 开始监听输入文件夹: /app/input (间隔 2.0s)
+2026-08-22 17:24:59 | INFO    | src.watcher | 本轮扫描发现1个待处理文件: ['1787390224.json']
+2026-08-22 17:24:59 | INFO    | src.api.app | 收到开始任务请求: input_file=/app/input/1787390224.json
+2026-08-22 17:24:59 | INFO    | src.api.task_manager | 任务已创建: task_id=2f52f171c536 来源=/app/input/1787390224.json
+2026-08-22 17:24:59 | INFO    | src.api.task_manager | 任务开始执行: task_id=2f52f171c536 来源=/app/input/1787390224.json
+2026-08-22 17:24:59 | INFO    | src.main | 开始异步处理文件: /app/input/1787390224.json
+2026-08-22 17:24:59 | INFO    | httpx | HTTP Request: POST http://127.0.0.1:8000/api/tasks "HTTP/1.1 202 Accepted"
+2026-08-22 17:24:59 | INFO    | src.watcher | 发现新文件 1787390224.json -> 已开始任务 task_id=2f52f171c536
+2026-08-22 17:24:59 | INFO    | src.watcher | 文件已提交并记录状态: 1787390224.json (275514字节)
+2026-08-22 17:24:59 | INFO    | src.core.export_parser | 解析会话[260818ZM精致河南省郑州市中牟县大孟镇融创观澜壹号三期6-2-1102]: 有效文本消息71条 显式role标注71条 角色分布={'customer': 71} 未获响应39条
+2026-08-22 17:24:59 | INFO    | src.core.export_parser | 解析会话[260819W 精致母婴W上海闵行区浦锦]: 有效文本消息2条 显式role标注2条 角色分布={'customer': 2} 未获响应1条
+2026-08-22 17:24:59 | INFO    | src.core.export_parser | 解析会话[260819ZM工装精致四川省成都市成华]: 有效文本消息5条 显式role标注5条 角色分布={'eng_head': 1, 'customer': 4} 未获响应4条
+2026-08-22 17:24:59 | INFO    | src.core.export_parser | 解析会话[260820ZM 精致上海国贸虹桥璟上云河璟庭4幢6号801]: 有效文本消息85条 显式role标注85条 角色分布={'customer': 80, 'eng_head': 5} 未获响应1条
+2026-08-22 17:24:59 | INFO    | src.core.export_parser | 解析会话[260820ZM 精致北京市西城区马连道东街甲2号院2号楼1502]: 有效文本消息23条 显式role标注23条 角色分布={'eng_head': 1, 'customer': 22} 未获响应1条
+2026-08-22 17:24:59 | INFO    | src.core.export_parser | 解析会话[260822W精致母婴W海淀区太阳园6号楼东]: 有效文本消息3条 显式role标注3条 角色分布={'eng_head': 1, '除醛师': 1, 'customer': 1} 未获响应1条
+2026-08-22 17:24:59 | INFO    | src.core.export_parser | 解析会话[8.18高端北京市门头沟区京能西山印]: 有效文本消息79条 显式role标注79条 角色分布={'eng_head': 1, 'customer': 78} 未获响应1条
+2026-08-22 17:24:59 | INFO    | src.core.export_parser | 解析会话[8.25高端 北京市西城区阳光丽景北]: 有效文本消息11条 显式role标注11条 角色分布={'eng_head': 1, '除醛师': 6, 'customer': 4} 未获响应1条
+2026-08-22 17:24:59 | INFO    | src.core.export_parser | 解析会话[LR26.8.18 精致 丰台区钟萃路 3 号院 2号楼2单元1301]: 有效文本消息4条 显式role标注4条 角色分布={'customer': 4} 未获响应2条
+2026-08-22 17:24:59 | INFO    | src.core.export_parser | 解析会话[LR26.8.19精致 西城区东绒线胡同54号院内106室]: 有效文本消息6条 显式role标注6条 角色分布={'eng_head': 4, 'customer': 2} 未获响应1条
+2026-08-22 17:24:59 | INFO    | src.core.export_parser | 解析会话[LR26.8.22 精致 河北省承德市双桥区鼎峰·中瑞城38号楼2单元303]: 有效文本消息9条 显式role标注9条 角色分布={'customer': 9} 未获响应1条
+2026-08-22 17:24:59 | INFO    | src.core.export_parser | 解析会话[LR26.8.23 高端 朝阳区小红门路朝阳·中建星光里5号楼1单元1702]: 有效文本消息13条 显式role标注13条 角色分布={'customer': 13} 未获响应1条
+2026-08-22 17:24:59 | INFO    | src.core.export_parser | 解析会话[企业微信团队]: 有效文本消息1条 显式role标注1条 角色分布={'customer': 1} 未获响应1条
+2026-08-22 17:24:59 | INFO    | src.main | 会话[260818ZM精致河南省郑州市中牟县大孟镇融创观澜壹号三期6-2-1102] 进入LLM判定路径: 规则引擎预判=未触发 消息71条
+2026-08-22 17:24:59 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息71条 对话记录长度=13212字符
+2026-08-22 17:24:59 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共13949字符)
+2026-08-22 17:25:18 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:25:18 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=18748ms 响应长度=129字符
+2026-08-22 17:25:18 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=18750ms) 依据=聊天记录中主要为系统占位符（疑似图片/文件）及日常沟通（如“到了”、房间名称等），未包含订单信息、预约、合同、施工或药剂等特定触发场景，不满足任何触发条件。
+2026-08-22 17:25:18 | INFO    | src.main | 会话[260818ZM精致河南省郑州市中牟县大孟镇融创观澜壹号三期6-2-1102] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:25:18 | INFO    | src.main | 会话[260819W 精致母婴W上海闵行区浦锦] 进入LLM判定路径: 规则引擎预判=未触发 消息2条
+2026-08-22 17:25:18 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息2条 对话记录长度=196字符
+2026-08-22 17:25:18 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共864字符)
+2026-08-22 17:25:30 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:25:30 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=11963ms 响应长度=64字符
+2026-08-22 17:25:30 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=11964ms) 依据=客户已回复确认表情，对话已达成一致/结束确认，无需智能体介入。
+2026-08-22 17:25:30 | INFO    | src.main | 会话[260819W 精致母婴W上海闵行区浦锦] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:25:30 | INFO    | src.main | 会话[260819ZM工装精致四川省成都市成华] 触发: type=construction_timeout intent=construction score=12.0 触发消息=@期。。。 感谢您选择清新全家进行治理\n这个是咱们后续的专属服务群，此群不会解散，您后续有任何问题都可以群内进行沟通\n群内有咱们各个部门的负责人员\n我是除...(共224字符)
+2026-08-22 17:25:30 | INFO    | src.main | 会话[260819ZM工装精致四川省成都市成华] 进入LLM判定路径: 规则引擎预判=construction_timeout 消息5条
+2026-08-22 17:25:30 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息15条 对话记录长度=703字符
+2026-08-22 17:25:30 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1384字符)
+2026-08-22 17:25:53 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:25:53 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=23969ms 响应长度=104字符
+2026-08-22 17:25:53 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=23970ms) 依据=最后一条消息为销售(明明)发送的暂停服务通知，并非客户发送的预约、改期、施工、合同或药剂相关诉求，不满足任何触发条件。
+2026-08-22 17:25:53 | INFO    | src.main | 会话[260819ZM工装精致四川省成都市成华] 规则引擎曾触发(construction_timeout), 但LLM判定无需回复, 不回复
+2026-08-22 17:25:53 | INFO    | src.main | 会话[260820ZM 精致上海国贸虹桥璟上云河璟庭4幢6号801] 进入LLM判定路径: 规则引擎预判=未触发 消息85条
+2026-08-22 17:25:53 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息86条 对话记录长度=4720字符
+2026-08-22 17:25:53 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共5472字符)
+2026-08-22 17:26:03 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:26:03 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=9473ms 响应长度=85字符
+2026-08-22 17:26:03 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=9474ms) 依据=客户发送预约保洁时间相关内容后，工作人员已回复“好的”，对话已达成一致并结束确认，不属于无人回应的情况。
+2026-08-22 17:26:03 | INFO    | src.main | 会话[260820ZM 精致上海国贸虹桥璟上云河璟庭4幢6号801] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:26:03 | INFO    | src.main | 会话[260820ZM 精致北京市西城区马连道东街甲2号院2号楼1502] 进入LLM判定路径: 规则引擎预判=未触发 消息23条
+2026-08-22 17:26:03 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息23条 对话记录长度=1228字符
+2026-08-22 17:26:03 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1917字符)
+2026-08-22 17:26:15 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:26:15 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=12262ms 响应长度=85字符
+2026-08-22 17:26:15 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=12263ms) 依据=客户提出更改上门时间为九点，工作人员已回复'好的'进行确认，对话已达成一致并结束，不存在无人回应的情况。
+2026-08-22 17:26:15 | INFO    | src.main | 会话[260820ZM 精致北京市西城区马连道东街甲2号院2号楼1502] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:26:15 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] 进入LLM判定路径: 规则引擎预判=未触发 消息3条
+2026-08-22 17:26:15 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息3条 对话记录长度=208字符
+2026-08-22 17:26:15 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共877字符)
+2026-08-22 17:26:46 | WARNING | src.llm.llm_client | LLM调用失败(异步, 第1/3次): 
+2026-08-22 17:26:59 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:26:59 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=44268ms 响应长度=171字符
+2026-08-22 17:26:59 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=construction_timeout 判定耗时=44270ms 依据=孙振龙虽标注为customer，但除醛师明确称呼其为'孙师傅'并请其确认上门时间，孙振龙回复'暂定上午8点半'属于现场施工/上门作业时间确认内容，且该消息之后无人回应，符合construction_timeout触发条件
+2026-08-22 17:26:59 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] LLM判定(construction_timeout)与规则引擎预判(未触发)不一致, 以LLM为准
+2026-08-22 17:26:59 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] 应用LLM判定响应: trigger=construction_timeout 响应1条 at=['@销售'] reply=师傅可能正在工作，我们已经提醒师傅尽快联系您~
+2026-08-22 17:26:59 | INFO    | src.main | 会话[8.18高端北京市门头沟区京能西山印] 进入LLM判定路径: 规则引擎预判=未触发 消息79条
+2026-08-22 17:26:59 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息81条 对话记录长度=4677字符
+2026-08-22 17:26:59 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共5424字符)
+2026-08-22 17:27:11 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:27:11 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=11616ms 响应长度=71字符
+2026-08-22 17:27:11 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=11618ms) 依据=客户已回复“好”确认复检上门时间，对话已达成一致并结束确认，不属于无人回应。
+2026-08-22 17:27:11 | INFO    | src.main | 会话[8.18高端北京市门头沟区京能西山印] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:27:11 | INFO    | src.main | 会话[8.25高端 北京市西城区阳光丽景北] 进入LLM判定路径: 规则引擎预判=未触发 消息11条
+2026-08-22 17:27:11 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息11条 对话记录长度=1036字符
+2026-08-22 17:27:11 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1713字符)
+2026-08-22 17:27:30 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:27:30 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=19195ms 响应长度=144字符
+2026-08-22 17:27:30 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=19198ms) 依据=最后一条消息是LCY(customer)发送的'好的收到'，属于简单的确认/致谢回复，对话已达成一致并结束。之前LCY关于预约时间的消息(18:22:30)已被其他成员回应，不满足'无人回应'条件。
+2026-08-22 17:27:30 | INFO    | src.main | 会话[8.25高端 北京市西城区阳光丽景北] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:27:30 | INFO    | src.main | 会话[LR26.8.18 精致 丰台区钟萃路 3 号院 2号楼2单元1301] 进入LLM判定路径: 规则引擎预判=未触发 消息4条
+2026-08-22 17:27:30 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息4条 对话记录长度=191字符
+2026-08-22 17:27:30 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共861字符)
+2026-08-22 17:27:41 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:27:41 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=11371ms 响应长度=114字符
+2026-08-22 17:27:41 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=appointment_timeout 判定耗时=11372ms 依据=客户最后一条消息'到了'是关于上门/到达确认的内容，且该消息之后无其他成员回应，属于预约上门相关无人回应情况
+2026-08-22 17:27:41 | INFO    | src.main | 会话[LR26.8.18 精致 丰台区钟萃路 3 号院 2号楼2单元1301] LLM判定(appointment_timeout)与规则引擎预判(未触发)不一致, 以LLM为准
+2026-08-22 17:27:41 | INFO    | src.main | 会话[LR26.8.18 精致 丰台区钟萃路 3 号院 2号楼2单元1301] 应用LLM判定响应: trigger=appointment_timeout 响应1条 at=['@师傅'] reply=师傅可能正在工作，我们已经提醒师傅尽快联系您~
+2026-08-22 17:27:41 | INFO    | src.main | 会话[LR26.8.19精致 西城区东绒线胡同54号院内106室] 进入LLM判定路径: 规则引擎预判=未触发 消息6条
+2026-08-22 17:27:41 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息7条 对话记录长度=429字符
+2026-08-22 17:27:41 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1102字符)
+2026-08-22 17:27:54 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:27:54 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=12903ms 响应长度=140字符
+2026-08-22 17:27:54 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=12905ms) 依据=客户14:31:28发送'已沟通上门时间'后，工程服务专员在14:32:45进行了回复（发送了代码/链接），不属于无人回应的情况。最后一条消息为哈希代码，不符合booking的字段：值格式。
+2026-08-22 17:27:54 | INFO    | src.main | 会话[LR26.8.19精致 西城区东绒线胡同54号院内106室] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:27:54 | INFO    | src.main | 会话[LR26.8.22 精致 河北省承德市双桥区鼎峰·中瑞城38号楼2单元303] 进入LLM判定路径: 规则引擎预判=未触发 消息9条
+2026-08-22 17:27:54 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息28条 对话记录长度=971字符
+2026-08-22 17:27:54 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1665字符)
+2026-08-22 17:28:07 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:28:07 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=12625ms 响应长度=108字符
+2026-08-22 17:28:07 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=12626ms) 依据=客户（茱丽.耶）最后回复'好的，没问题'，已对李师傅提出的22号上午11点上门时间进行确认，对话已达成一致，属于结束确认场景。
+2026-08-22 17:28:07 | INFO    | src.main | 会话[LR26.8.22 精致 河北省承德市双桥区鼎峰·中瑞城38号楼2单元303] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:28:07 | INFO    | src.main | 会话[LR26.8.23 高端 朝阳区小红门路朝阳·中建星光里5号楼1单元1702] 进入LLM判定路径: 规则引擎预判=未触发 消息13条
+2026-08-22 17:28:07 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息32条 对话记录长度=1211字符
+2026-08-22 17:28:07 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1909字符)
+2026-08-22 17:28:26 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:28:26 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=19501ms 响应长度=78字符
+2026-08-22 17:28:26 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=19502ms) 依据=客户最后回复'好的'，对话已达成一致并结束确认，无需智能客服介入。
+2026-08-22 17:28:26 | INFO    | src.main | 会话[LR26.8.23 高端 朝阳区小红门路朝阳·中建星光里5号楼1单元1702] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:28:26 | INFO    | src.main | 会话[企业微信团队] 进入LLM判定路径: 规则引擎预判=未触发 消息1条
+2026-08-22 17:28:26 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息1条 对话记录长度=54字符
+2026-08-22 17:28:26 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共721字符)
+2026-08-22 17:28:33 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:28:33 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=6592ms 响应长度=66字符
+2026-08-22 17:28:33 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=6594ms) 依据=消息为企业微信系统版本更新通知，属于无关内容，不触发任何售后场景。
+2026-08-22 17:28:33 | INFO    | src.main | 会话[企业微信团队] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:28:33 | INFO    | src.main | 文件处理完成: /app/input/1787390224.json 耗时=214580ms
+2026-08-22 17:28:33 | INFO    | src.api.task_manager | 任务结果已落盘: task_id=2f52f171c536 -> /app/output/1787390224_result.json
+2026-08-22 17:28:33 | INFO    | src.api.task_manager | 任务执行成功: task_id=2f52f171c536 耗时=214601ms summary={'total': 13, 'triggered': 2} output=/app/output/1787390224_result.json
+2026-08-22 17:31:12 | INFO    | src.api.app | 收到开始任务请求: input_file=1787390224.json
+2026-08-22 17:31:12 | INFO    | src.api.task_manager | 任务已创建: task_id=b57cf1176034 来源=1787390224.json
+2026-08-22 17:31:12 | INFO    | src.api.task_manager | 任务开始执行: task_id=b57cf1176034 来源=1787390224.json
+2026-08-22 17:31:12 | INFO    | src.main | 开始异步处理文件: /app/input/1787390224.json
+2026-08-22 17:31:12 | INFO    | src.core.export_parser | 解析会话[260818ZM精致河南省郑州市中牟县大孟镇融创观澜壹号三期6-2-1102]: 有效文本消息71条 显式role标注71条 角色分布={'customer': 71} 未获响应39条
+2026-08-22 17:31:12 | INFO    | src.core.export_parser | 解析会话[260819W 精致母婴W上海闵行区浦锦]: 有效文本消息2条 显式role标注2条 角色分布={'customer': 2} 未获响应1条
+2026-08-22 17:31:12 | INFO    | src.core.export_parser | 解析会话[260819ZM工装精致四川省成都市成华]: 有效文本消息5条 显式role标注5条 角色分布={'eng_head': 1, 'customer': 4} 未获响应4条
+2026-08-22 17:31:12 | INFO    | src.core.export_parser | 解析会话[260820ZM 精致上海国贸虹桥璟上云河璟庭4幢6号801]: 有效文本消息85条 显式role标注85条 角色分布={'customer': 80, 'eng_head': 5} 未获响应1条
+2026-08-22 17:31:12 | INFO    | src.core.export_parser | 解析会话[260820ZM 精致北京市西城区马连道东街甲2号院2号楼1502]: 有效文本消息23条 显式role标注23条 角色分布={'eng_head': 1, 'customer': 22} 未获响应1条
+2026-08-22 17:31:12 | INFO    | src.core.export_parser | 解析会话[260822W精致母婴W海淀区太阳园6号楼东]: 有效文本消息3条 显式role标注3条 角色分布={'eng_head': 1, '除醛师': 1, 'customer': 1} 未获响应1条
+2026-08-22 17:31:12 | INFO    | src.core.export_parser | 解析会话[8.18高端北京市门头沟区京能西山印]: 有效文本消息79条 显式role标注79条 角色分布={'eng_head': 1, 'customer': 78} 未获响应1条
+2026-08-22 17:31:12 | INFO    | src.core.export_parser | 解析会话[8.25高端 北京市西城区阳光丽景北]: 有效文本消息11条 显式role标注11条 角色分布={'eng_head': 1, '除醛师': 6, 'customer': 4} 未获响应1条
+2026-08-22 17:31:12 | INFO    | src.core.export_parser | 解析会话[LR26.8.18 精致 丰台区钟萃路 3 号院 2号楼2单元1301]: 有效文本消息4条 显式role标注4条 角色分布={'customer': 4} 未获响应2条
+2026-08-22 17:31:12 | INFO    | src.core.export_parser | 解析会话[LR26.8.19精致 西城区东绒线胡同54号院内106室]: 有效文本消息6条 显式role标注6条 角色分布={'eng_head': 4, 'customer': 2} 未获响应1条
+2026-08-22 17:31:12 | INFO    | src.core.export_parser | 解析会话[LR26.8.22 精致 河北省承德市双桥区鼎峰·中瑞城38号楼2单元303]: 有效文本消息9条 显式role标注9条 角色分布={'customer': 9} 未获响应1条
+2026-08-22 17:31:12 | INFO    | src.core.export_parser | 解析会话[LR26.8.23 高端 朝阳区小红门路朝阳·中建星光里5号楼1单元1702]: 有效文本消息13条 显式role标注13条 角色分布={'customer': 13} 未获响应1条
+2026-08-22 17:31:12 | INFO    | src.core.export_parser | 解析会话[企业微信团队]: 有效文本消息1条 显式role标注1条 角色分布={'customer': 1} 未获响应1条
+2026-08-22 17:31:12 | INFO    | src.main | 会话[260818ZM精致河南省郑州市中牟县大孟镇融创观澜壹号三期6-2-1102] 进入LLM判定路径: 规则引擎预判=未触发 消息71条
+2026-08-22 17:31:12 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息71条 对话记录长度=13212字符
+2026-08-22 17:31:12 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共13949字符)
+2026-08-22 17:31:30 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:31:30 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=18280ms 响应长度=102字符
+2026-08-22 17:31:30 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=18281ms) 依据=聊天记录主要为长串加密字符及日常沟通，无订单、预约、合同、施工或药剂等特定诉求，且后续有互动，不满足任何触发条件。
+2026-08-22 17:31:30 | INFO    | src.main | 会话[260818ZM精致河南省郑州市中牟县大孟镇融创观澜壹号三期6-2-1102] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:31:30 | INFO    | src.main | 会话[260819W 精致母婴W上海闵行区浦锦] 进入LLM判定路径: 规则引擎预判=未触发 消息2条
+2026-08-22 17:31:30 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息2条 对话记录长度=196字符
+2026-08-22 17:31:30 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共864字符)
+2026-08-22 17:31:42 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:31:42 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=12024ms 响应长度=71字符
+2026-08-22 17:31:42 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=12026ms) 依据=客户已回复表情确认上门时间及注意事项，对话已达成一致并结束，无需智能体介入。
+2026-08-22 17:31:42 | INFO    | src.main | 会话[260819W 精致母婴W上海闵行区浦锦] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:31:42 | INFO    | src.main | 会话[260819ZM工装精致四川省成都市成华] 触发: type=construction_timeout intent=construction score=12.0 触发消息=@期。。。 感谢您选择清新全家进行治理\n这个是咱们后续的专属服务群，此群不会解散，您后续有任何问题都可以群内进行沟通\n群内有咱们各个部门的负责人员\n我是除...(共224字符)
+2026-08-22 17:31:42 | INFO    | src.main | 会话[260819ZM工装精致四川省成都市成华] 进入LLM判定路径: 规则引擎预判=construction_timeout 消息5条
+2026-08-22 17:31:42 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息15条 对话记录长度=703字符
+2026-08-22 17:31:42 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1384字符)
+2026-08-22 17:31:56 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:31:56 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=14083ms 响应长度=111字符
+2026-08-22 17:31:56 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=appointment_timeout 判定耗时=14084ms 依据=最后一条消息提到预约时间有变动需要暂停，属于改期/预约上门相关内容，且该消息之后无人回应。
+2026-08-22 17:31:56 | INFO    | src.main | 会话[260819ZM工装精致四川省成都市成华] LLM判定(appointment_timeout)与规则引擎预判(construction_timeout)不一致, 以LLM为准
+2026-08-22 17:31:56 | INFO    | src.main | 会话[260819ZM工装精致四川省成都市成华] 应用LLM判定响应: trigger=appointment_timeout 响应1条 at=['@师傅'] reply=师傅可能正在工作，我们已经提醒师傅尽快联系您~
+2026-08-22 17:31:56 | INFO    | src.main | 会话[260820ZM 精致上海国贸虹桥璟上云河璟庭4幢6号801] 进入LLM判定路径: 规则引擎预判=未触发 消息85条
+2026-08-22 17:31:56 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息86条 对话记录长度=4720字符
+2026-08-22 17:31:56 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共5472字符)
+2026-08-22 17:32:12 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:32:12 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=15178ms 响应长度=80字符
+2026-08-22 17:32:12 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=15180ms) 依据=对话已达成一致，工作人员已回复确认上门及保洁时间，无未回应的客户消息。
+2026-08-22 17:32:12 | INFO    | src.main | 会话[260820ZM 精致上海国贸虹桥璟上云河璟庭4幢6号801] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:32:12 | INFO    | src.main | 会话[260820ZM 精致北京市西城区马连道东街甲2号院2号楼1502] 进入LLM判定路径: 规则引擎预判=未触发 消息23条
+2026-08-22 17:32:12 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息23条 对话记录长度=1228字符
+2026-08-22 17:32:12 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1917字符)
+2026-08-22 17:32:24 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:32:24 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=12578ms 响应长度=102字符
+2026-08-22 17:32:24 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=12580ms) 依据=客户虽然发送了更改上门时间的消息，但随后工作人员进行了回应并确认了最终时间，对话已达成一致，不属于无人回应的情况。
+2026-08-22 17:32:24 | INFO    | src.main | 会话[260820ZM 精致北京市西城区马连道东街甲2号院2号楼1502] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:32:24 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] 进入LLM判定路径: 规则引擎预判=未触发 消息3条
+2026-08-22 17:32:24 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息3条 对话记录长度=208字符
+2026-08-22 17:32:24 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共877字符)
+2026-08-22 17:32:35 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:32:35 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=10416ms 响应长度=145字符
+2026-08-22 17:32:35 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=appointment_timeout 判定耗时=10417ms 依据=客户孙振龙发送了确认上门时间的消息（暂定上午8点半），属于预约上门/确认上门时间相关内容，且该消息之后无其他成员回应，符合appointment_timeout触发条件。
+2026-08-22 17:32:35 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] LLM判定(appointment_timeout)与规则引擎预判(未触发)不一致, 以LLM为准
+2026-08-22 17:32:35 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] 应用LLM判定响应: trigger=appointment_timeout 响应1条 at=['@师傅'] reply=师傅可能正在工作，我们已经提醒师傅尽快联系您~
+2026-08-22 17:32:35 | INFO    | src.main | 会话[8.18高端北京市门头沟区京能西山印] 进入LLM判定路径: 规则引擎预判=未触发 消息79条
+2026-08-22 17:32:35 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息81条 对话记录长度=4677字符
+2026-08-22 17:32:35 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共5424字符)
+2026-08-22 17:32:48 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:32:48 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=13443ms 响应长度=99字符
+2026-08-22 17:32:48 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=13444ms) 依据=客户与工作人员已就复检时间（24号）达成一致，且客户最后回复“好”进行确认，对话已正常结束，无需智能体介入。
+2026-08-22 17:32:48 | INFO    | src.main | 会话[8.18高端北京市门头沟区京能西山印] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:32:48 | INFO    | src.main | 会话[8.25高端 北京市西城区阳光丽景北] 进入LLM判定路径: 规则引擎预判=未触发 消息11条
+2026-08-22 17:32:48 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息11条 对话记录长度=1036字符
+2026-08-22 17:32:48 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1713字符)
+2026-08-22 17:33:03 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:33:03 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=14789ms 响应长度=151字符
+2026-08-22 17:33:03 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=14790ms) 依据=客户LCY在18:22:30发送了预约时间相关内容（定25号），但该消息之后有其他成员（杨万明、除醛师）进行了回应；最后一条消息18:35:13 LCY回复'好的收到'属于确认/致谢类内容，无需触发智能客服回复。
+2026-08-22 17:33:03 | INFO    | src.main | 会话[8.25高端 北京市西城区阳光丽景北] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:33:03 | INFO    | src.main | 会话[LR26.8.18 精致 丰台区钟萃路 3 号院 2号楼2单元1301] 进入LLM判定路径: 规则引擎预判=未触发 消息4条
+2026-08-22 17:33:03 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息4条 对话记录长度=191字符
+2026-08-22 17:33:03 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共861字符)
+2026-08-22 17:33:22 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:33:22 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=19720ms 响应长度=86字符
+2026-08-22 17:33:22 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=construction_timeout 判定耗时=19721ms 依据=客户发送到达现场（上门作业相关）的消息，且之后无其他成员回应。
+2026-08-22 17:33:22 | INFO    | src.main | 会话[LR26.8.18 精致 丰台区钟萃路 3 号院 2号楼2单元1301] LLM判定(construction_timeout)与规则引擎预判(未触发)不一致, 以LLM为准
+2026-08-22 17:33:22 | INFO    | src.main | 会话[LR26.8.18 精致 丰台区钟萃路 3 号院 2号楼2单元1301] 应用LLM判定响应: trigger=construction_timeout 响应1条 at=['@销售'] reply=师傅可能正在工作，我们已经提醒师傅尽快联系您~
+2026-08-22 17:33:22 | INFO    | src.main | 会话[LR26.8.19精致 西城区东绒线胡同54号院内106室] 进入LLM判定路径: 规则引擎预判=未触发 消息6条
+2026-08-22 17:33:22 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息7条 对话记录长度=429字符
+2026-08-22 17:33:22 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1102字符)
+2026-08-22 17:33:37 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:33:37 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=14665ms 响应长度=78字符
+2026-08-22 17:33:37 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=14666ms) 依据=客户发送了关于上门时间的消息，但随后工程服务专员进行了回复，不满足“无人回应”的触发条件。
+2026-08-22 17:33:37 | INFO    | src.main | 会话[LR26.8.19精致 西城区东绒线胡同54号院内106室] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:33:37 | INFO    | src.main | 会话[LR26.8.22 精致 河北省承德市双桥区鼎峰·中瑞城38号楼2单元303] 进入LLM判定路径: 规则引擎预判=未触发 消息9条
+2026-08-22 17:33:37 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息28条 对话记录长度=971字符
+2026-08-22 17:33:37 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1665字符)
+2026-08-22 17:33:54 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:33:54 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=16997ms 响应长度=96字符
+2026-08-22 17:33:54 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=16999ms) 依据=客户茱丽.耶在最后回复了'好的，没问题'，表示已确认上门时间，对话已达成一致并结束确认，无需智能体回复
+2026-08-22 17:33:54 | INFO    | src.main | 会话[LR26.8.22 精致 河北省承德市双桥区鼎峰·中瑞城38号楼2单元303] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:33:54 | INFO    | src.main | 会话[LR26.8.23 高端 朝阳区小红门路朝阳·中建星光里5号楼1单元1702] 进入LLM判定路径: 规则引擎预判=未触发 消息13条
+2026-08-22 17:33:54 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息32条 对话记录长度=1211字符
+2026-08-22 17:33:54 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1909字符)
+2026-08-22 17:34:24 | WARNING | src.llm.llm_client | LLM调用失败(异步, 第1/3次): 
+2026-08-22 17:34:50 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:34:50 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=56941ms 响应长度=79字符
+2026-08-22 17:34:50 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=56942ms) 依据=对话已达成一致，且最后一条消息为客户回复“好的”表示结束确认，无需智能体再回复。
+2026-08-22 17:34:50 | INFO    | src.main | 会话[LR26.8.23 高端 朝阳区小红门路朝阳·中建星光里5号楼1单元1702] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:34:50 | INFO    | src.main | 会话[企业微信团队] 进入LLM判定路径: 规则引擎预判=未触发 消息1条
+2026-08-22 17:34:50 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息1条 对话记录长度=54字符
+2026-08-22 17:34:50 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共721字符)
+2026-08-22 17:34:56 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:34:56 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=5038ms 响应长度=59字符
+2026-08-22 17:34:56 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=5040ms) 依据=消息为系统通知或无关内容，非客户实际诉求，无需触发。
+2026-08-22 17:34:56 | INFO    | src.main | 会话[企业微信团队] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:34:56 | INFO    | src.main | 文件处理完成: /app/input/1787390224.json 耗时=224228ms
+2026-08-22 17:34:56 | INFO    | src.api.task_manager | 任务结果已落盘: task_id=b57cf1176034 -> /app/output/1787390224_result.json
+2026-08-22 17:34:56 | INFO    | src.api.task_manager | 任务执行成功: task_id=b57cf1176034 耗时=224250ms summary={'total': 13, 'triggered': 3} output=/app/output/1787390224_result.json
+2026-08-22 17:52:35 | INFO    | src.api.app | 服务启动: input_dir=/app/input output_dir=/app/output watcher.enabled=True
+2026-08-22 17:52:35 | INFO    | src.llm.llm_client | LLM配置加载完成: enabled=True provider=openai_compatible model=qwen3.7-plus base_url=https://dashscope.aliyuncs.com/compatible-mode/v1 api_key=已配置 temperature=0.5 max_tokens=512 timeout=30s retries=2
+2026-08-22 17:52:35 | INFO    | src.api.app | 输入文件夹监听已启动: /app/input -> http://127.0.0.1:8000
+2026-08-22 17:52:35 | INFO    | src.watcher | 开始监听输入文件夹: /app/input (间隔 2.0s)
+2026-08-22 17:52:44 | INFO    | src.api.app | 收到开始任务请求: input_file=(内联data)
+2026-08-22 17:52:44 | INFO    | src.api.task_manager | 任务已创建: task_id=451f546ecbf6 来源=(内联data)
+2026-08-22 17:52:44 | INFO    | src.api.task_manager | 任务开始执行: task_id=451f546ecbf6 来源=(内联data)
+2026-08-22 17:52:44 | INFO    | src.core.export_parser | 解析会话[260822W精致母婴W海淀区太阳园6号楼东]: 有效文本消息2条 过滤噪音消息1条 显式role标注3条 角色分布={'除醛师': 1, 'customer': 1} 未获响应1条
+2026-08-22 17:52:44 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] 进入LLM判定路径: 规则引擎预判=未触发 消息2条
+2026-08-22 17:52:44 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息2条 对话记录长度=134字符
+2026-08-22 17:52:44 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共972字符)
+2026-08-22 17:52:56 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:52:56 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=11765ms 响应长度=148字符
+2026-08-22 17:52:56 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=11831ms) 依据=孙振龙虽标注为customer，但其回复'暂定上午8点半'属于以安排方口吻确认上门时间，实际身份为师傅/工作人员。此消息为工作人员之间的工作协调消息（对接确认上门时间安排），不构成客户诉求，不触发任何类别。
+2026-08-22 17:52:56 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:52:56 | INFO    | src.api.task_manager | 任务执行成功: task_id=451f546ecbf6 耗时=11843ms summary={'total': 1, 'triggered': 0} output=None
+2026-08-22 17:54:32 | INFO    | src.api.app | 收到开始任务请求: input_file=(内联data)
+2026-08-22 17:54:32 | INFO    | src.api.task_manager | 任务已创建: task_id=08e230c6e6c1 来源=(内联data)
+2026-08-22 17:54:32 | INFO    | src.api.task_manager | 任务开始执行: task_id=08e230c6e6c1 来源=(内联data)
+2026-08-22 17:54:32 | INFO    | src.core.export_parser | 解析会话[回归-客户真诉求]: 有效文本消息1条 过滤噪音消息0条 显式role标注1条 角色分布={'customer': 1} 未获响应1条
+2026-08-22 17:54:32 | INFO    | src.main | 会话[回归-客户真诉求] 触发: type=appointment_timeout intent=appointment score=7.0 触发消息=哦，忘了，我明天上午有事，十十十点以后可以吗？
+2026-08-22 17:54:32 | INFO    | src.main | 会话[回归-客户真诉求] 进入LLM判定路径: 规则引擎预判=appointment_timeout 消息1条
+2026-08-22 17:54:32 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息1条 对话记录长度=60字符
+2026-08-22 17:54:32 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共897字符)
+2026-08-22 17:54:38 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:54:38 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=6165ms 响应长度=90字符
+2026-08-22 17:54:38 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=appointment_timeout 判定耗时=6166ms 依据=客户发送了修改/确认上门时间的相关内容，且该消息之后无人回应
+2026-08-22 17:54:38 | INFO    | src.main | 会话[回归-客户真诉求] 应用LLM判定响应: trigger=appointment_timeout 响应1条 at=['@师傅'] reply=师傅可能正在工作，我们已经提醒师傅尽快联系您~
+2026-08-22 17:54:38 | INFO    | src.api.task_manager | 任务执行成功: task_id=08e230c6e6c1 耗时=6169ms summary={'total': 1, 'triggered': 1} output=None
+2026-08-22 17:56:33 | INFO    | src.watcher | 本轮扫描发现1个待处理文件: ['1787391629.json']
+2026-08-22 17:56:33 | INFO    | src.api.app | 收到开始任务请求: input_file=/app/input/1787391629.json
+2026-08-22 17:56:33 | INFO    | src.api.task_manager | 任务已创建: task_id=01f940591b16 来源=/app/input/1787391629.json
+2026-08-22 17:56:33 | INFO    | src.api.task_manager | 任务开始执行: task_id=01f940591b16 来源=/app/input/1787391629.json
+2026-08-22 17:56:33 | INFO    | src.main | 开始异步处理文件: /app/input/1787391629.json
+2026-08-22 17:56:33 | INFO    | httpx | HTTP Request: POST http://127.0.0.1:8000/api/tasks "HTTP/1.1 202 Accepted"
+2026-08-22 17:56:33 | INFO    | src.watcher | 发现新文件 1787391629.json -> 已开始任务 task_id=01f940591b16
+2026-08-22 17:56:33 | INFO    | src.watcher | 文件已提交并记录状态: 1787391629.json (173849字节)
+2026-08-22 17:56:33 | INFO    | src.core.export_parser | 解析会话[260818ZM精致河南省郑州市中牟县大孟镇融创观澜壹号三期6-2-1102]: 有效文本消息70条 过滤噪音消息1条 显式role标注71条 角色分布={'customer': 70} 未获响应39条
+2026-08-22 17:56:33 | INFO    | src.core.export_parser | 解析会话[260819W 精致母婴W上海闵行区浦锦]: 有效文本消息2条 过滤噪音消息0条 显式role标注2条 角色分布={'customer': 2} 未获响应1条
+2026-08-22 17:56:33 | INFO    | src.core.export_parser | 解析会话[260819ZM工装精致四川省成都市成华]: 有效文本消息3条 过滤噪音消息2条 显式role标注5条 角色分布={'customer': 3} 未获响应3条
+2026-08-22 17:56:33 | INFO    | src.core.export_parser | 解析会话[260820ZM 精致上海国贸虹桥璟上云河璟庭4幢6号801]: 有效文本消息83条 过滤噪音消息2条 显式role标注85条 角色分布={'customer': 78, 'eng_head': 5} 未获响应1条
+2026-08-22 17:56:33 | INFO    | src.core.export_parser | 解析会话[260820ZM 精致北京市西城区马连道东街甲2号院2号楼1502]: 有效文本消息22条 过滤噪音消息1条 显式role标注23条 角色分布={'customer': 22} 未获响应1条
+2026-08-22 17:56:33 | INFO    | src.core.export_parser | 解析会话[260822W精致母婴W海淀区太阳园6号楼东]: 有效文本消息2条 过滤噪音消息1条 显式role标注3条 角色分布={'除醛师': 1, 'customer': 1} 未获响应1条
+2026-08-22 17:56:33 | INFO    | src.core.export_parser | 解析会话[8.18高端北京市门头沟区京能西山印]: 有效文本消息14条 过滤噪音消息65条 显式role标注79条 角色分布={'customer': 14} 未获响应1条
+2026-08-22 17:56:33 | INFO    | src.core.export_parser | 解析会话[8.25高端 北京市西城区阳光丽景北]: 有效文本消息8条 过滤噪音消息3条 显式role标注11条 角色分布={'除醛师': 4, 'customer': 4} 未获响应1条
+2026-08-22 17:56:33 | INFO    | src.core.export_parser | 解析会话[LR26.8.18 精致 丰台区钟萃路 3 号院 2号楼2单元1301]: 有效文本消息4条 过滤噪音消息0条 显式role标注4条 角色分布={'customer': 4} 未获响应2条
+2026-08-22 17:56:33 | INFO    | src.core.export_parser | 解析会话[LR26.8.19精致 西城区东绒线胡同54号院内106室]: 有效文本消息5条 过滤噪音消息1条 显式role标注6条 角色分布={'eng_head': 3, 'customer': 2} 未获响应1条
+2026-08-22 17:56:33 | INFO    | src.core.export_parser | 解析会话[LR26.8.22 精致 河北省承德市双桥区鼎峰·中瑞城38号楼2单元303]: 有效文本消息7条 过滤噪音消息2条 显式role标注9条 角色分布={'customer': 7} 未获响应1条
+2026-08-22 17:56:33 | INFO    | src.core.export_parser | 解析会话[LR26.8.23 高端 朝阳区小红门路朝阳·中建星光里5号楼1单元1702]: 有效文本消息11条 过滤噪音消息2条 显式role标注13条 角色分布={'customer': 11} 未获响应1条
+2026-08-22 17:56:33 | INFO    | src.core.export_parser | 解析会话[企业微信团队]: 有效文本消息1条 过滤噪音消息0条 显式role标注1条 角色分布={'customer': 1} 未获响应1条
+2026-08-22 17:56:33 | INFO    | src.main | 会话[260818ZM精致河南省郑州市中牟县大孟镇融创观澜壹号三期6-2-1102] 进入LLM判定路径: 规则引擎预判=未触发 消息70条
+2026-08-22 17:56:33 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息70条 对话记录长度=13143字符
+2026-08-22 17:56:33 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共14049字符)
+2026-08-22 17:56:51 | INFO    | src.api.app | 服务启动: input_dir=/app/input output_dir=/app/output watcher.enabled=True
+2026-08-22 17:56:51 | INFO    | src.llm.llm_client | LLM配置加载完成: enabled=True provider=openai_compatible model=qwen3.7-plus base_url=https://dashscope.aliyuncs.com/compatible-mode/v1 api_key=已配置 temperature=0.5 max_tokens=512 timeout=30s retries=2
+2026-08-22 17:56:51 | INFO    | src.api.app | 输入文件夹监听已启动: /app/input -> http://127.0.0.1:8000
+2026-08-22 17:56:51 | INFO    | src.watcher | 开始监听输入文件夹: /app/input (间隔 2.0s)
+2026-08-22 17:57:01 | INFO    | src.api.app | 收到开始任务请求: input_file=(内联data)
+2026-08-22 17:57:01 | INFO    | src.api.task_manager | 任务已创建: task_id=1da121b9785c 来源=(内联data)
+2026-08-22 17:57:01 | INFO    | src.api.task_manager | 任务开始执行: task_id=1da121b9785c 来源=(内联data)
+2026-08-22 17:57:01 | INFO    | src.core.export_parser | 解析会话[role唯一依据验证-太阳园]: 有效文本消息2条 过滤噪音消息1条 显式role标注3条 角色分布={'除醛师': 1, 'customer': 1} 未获响应1条
+2026-08-22 17:57:01 | INFO    | src.main | 会话[role唯一依据验证-太阳园] 进入LLM判定路径: 规则引擎预判=未触发 消息2条
+2026-08-22 17:57:01 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息2条 对话记录长度=134字符
+2026-08-22 17:57:01 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共913字符)
+2026-08-22 17:57:11 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:57:11 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=9703ms 响应长度=155字符
+2026-08-22 17:57:11 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=appointment_timeout 判定耗时=9737ms 依据=最后一条消息由角色标注为customer的孙振龙发出，内容为'暂定上午8点半'，属于确认上门时间相关内容，且该消息之后无任何其他成员回应，符合appointment_timeout触发条件。
+2026-08-22 17:57:11 | INFO    | src.main | 会话[role唯一依据验证-太阳园] LLM判定(appointment_timeout)与规则引擎预判(未触发)不一致, 以LLM为准
+2026-08-22 17:57:11 | INFO    | src.main | 会话[role唯一依据验证-太阳园] 应用LLM判定响应: trigger=appointment_timeout 响应1条 at=['@师傅'] reply=师傅可能正在工作，我们已经提醒师傅尽快联系您~
+2026-08-22 17:57:11 | INFO    | src.api.task_manager | 任务执行成功: task_id=1da121b9785c 耗时=9748ms summary={'total': 1, 'triggered': 1} output=None
+2026-08-22 17:58:22 | INFO    | src.api.app | 收到开始任务请求: input_file=(内联data)
+2026-08-22 17:58:22 | INFO    | src.api.task_manager | 任务已创建: task_id=a3b9ccd9aaf5 来源=(内联data)
+2026-08-22 17:58:22 | INFO    | src.api.task_manager | 任务开始执行: task_id=a3b9ccd9aaf5 来源=(内联data)
+2026-08-22 17:58:22 | INFO    | src.core.export_parser | 解析会话[回归-已回应闭环]: 有效文本消息2条 过滤噪音消息0条 显式role标注2条 角色分布={'customer': 1, 'master': 1} 未获响应1条
+2026-08-22 17:58:22 | INFO    | src.main | 会话[回归-已回应闭环] 进入LLM判定路径: 规则引擎预判=未触发 消息2条
+2026-08-22 17:58:22 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息2条 对话记录长度=107字符
+2026-08-22 17:58:22 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共886字符)
+2026-08-22 17:58:22 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=a3b9ccd9aaf5 status=running
+2026-08-22 17:58:30 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 17:58:30 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=8089ms 响应长度=81字符
+2026-08-22 17:58:30 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=8091ms) 依据=客户发送了改期相关内容，但工作人员已进行回应，且最后一条消息由工作人员发出，不符合无人回应条件。
+2026-08-22 17:58:30 | INFO    | src.main | 会话[回归-已回应闭环] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 17:58:30 | INFO    | src.api.task_manager | 任务执行成功: task_id=a3b9ccd9aaf5 耗时=8095ms summary={'total': 1, 'triggered': 0} output=None
+2026-08-22 17:59:44 | INFO    | src.watcher | 本轮扫描发现1个待处理文件: ['1787391629.json']
+2026-08-22 17:59:44 | INFO    | src.api.app | 收到开始任务请求: input_file=/app/input/1787391629.json
+2026-08-22 17:59:44 | INFO    | src.api.task_manager | 任务已创建: task_id=586f42754dff 来源=/app/input/1787391629.json
+2026-08-22 17:59:44 | INFO    | src.api.task_manager | 任务开始执行: task_id=586f42754dff 来源=/app/input/1787391629.json
+2026-08-22 17:59:44 | INFO    | src.main | 开始异步处理文件: /app/input/1787391629.json
+2026-08-22 17:59:44 | INFO    | httpx | HTTP Request: POST http://127.0.0.1:8000/api/tasks "HTTP/1.1 202 Accepted"
+2026-08-22 17:59:44 | INFO    | src.watcher | 发现新文件 1787391629.json -> 已开始任务 task_id=586f42754dff
+2026-08-22 17:59:44 | INFO    | src.watcher | 文件已提交并记录状态: 1787391629.json (173854字节)
+2026-08-22 17:59:44 | INFO    | src.core.export_parser | 解析会话[260818ZM精致河南省郑州市中牟县大孟镇融创观澜壹号三期6-2-1102]: 有效文本消息70条 过滤噪音消息1条 显式role标注71条 角色分布={'customer': 70} 未获响应39条
+2026-08-22 17:59:44 | INFO    | src.core.export_parser | 解析会话[260819W 精致母婴W上海闵行区浦锦]: 有效文本消息2条 过滤噪音消息0条 显式role标注2条 角色分布={'除醛师': 1, 'customer': 1} 未获响应1条
+2026-08-22 17:59:44 | INFO    | src.core.export_parser | 解析会话[260819ZM工装精致四川省成都市成华]: 有效文本消息3条 过滤噪音消息2条 显式role标注5条 角色分布={'customer': 3} 未获响应3条
+2026-08-22 17:59:44 | INFO    | src.core.export_parser | 解析会话[260820ZM 精致上海国贸虹桥璟上云河璟庭4幢6号801]: 有效文本消息83条 过滤噪音消息2条 显式role标注85条 角色分布={'customer': 78, 'eng_head': 5} 未获响应1条
+2026-08-22 17:59:44 | INFO    | src.core.export_parser | 解析会话[260820ZM 精致北京市西城区马连道东街甲2号院2号楼1502]: 有效文本消息22条 过滤噪音消息1条 显式role标注23条 角色分布={'customer': 22} 未获响应1条
+2026-08-22 17:59:44 | INFO    | src.core.export_parser | 解析会话[260822W精致母婴W海淀区太阳园6号楼东]: 有效文本消息2条 过滤噪音消息1条 显式role标注3条 角色分布={'除醛师': 1, 'customer': 1} 未获响应1条
+2026-08-22 17:59:44 | INFO    | src.core.export_parser | 解析会话[8.18高端北京市门头沟区京能西山印]: 有效文本消息14条 过滤噪音消息65条 显式role标注79条 角色分布={'customer': 14} 未获响应1条
+2026-08-22 17:59:44 | INFO    | src.core.export_parser | 解析会话[8.25高端 北京市西城区阳光丽景北]: 有效文本消息8条 过滤噪音消息3条 显式role标注11条 角色分布={'除醛师': 4, 'customer': 4} 未获响应1条
+2026-08-22 17:59:44 | INFO    | src.core.export_parser | 解析会话[LR26.8.18 精致 丰台区钟萃路 3 号院 2号楼2单元1301]: 有效文本消息4条 过滤噪音消息0条 显式role标注4条 角色分布={'customer': 4} 未获响应2条
+2026-08-22 17:59:44 | INFO    | src.core.export_parser | 解析会话[LR26.8.19精致 西城区东绒线胡同54号院内106室]: 有效文本消息5条 过滤噪音消息1条 显式role标注6条 角色分布={'eng_head': 3, 'customer': 2} 未获响应1条
+2026-08-22 17:59:44 | INFO    | src.core.export_parser | 解析会话[LR26.8.22 精致 河北省承德市双桥区鼎峰·中瑞城38号楼2单元303]: 有效文本消息7条 过滤噪音消息2条 显式role标注9条 角色分布={'customer': 7} 未获响应1条
+2026-08-22 17:59:44 | INFO    | src.core.export_parser | 解析会话[LR26.8.23 高端 朝阳区小红门路朝阳·中建星光里5号楼1单元1702]: 有效文本消息11条 过滤噪音消息2条 显式role标注13条 角色分布={'customer': 11} 未获响应1条
+2026-08-22 17:59:44 | INFO    | src.core.export_parser | 解析会话[企业微信团队]: 有效文本消息1条 过滤噪音消息0条 显式role标注1条 角色分布={'customer': 1} 未获响应1条
+2026-08-22 17:59:44 | INFO    | src.main | 会话[260818ZM精致河南省郑州市中牟县大孟镇融创观澜壹号三期6-2-1102] 进入LLM判定路径: 规则引擎预判=未触发 消息70条
+2026-08-22 17:59:44 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息70条 对话记录长度=13143字符
+2026-08-22 17:59:44 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共13990字符)
+2026-08-22 18:00:01 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:00:01 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=16952ms 响应长度=94字符
+2026-08-22 18:00:01 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=16953ms) 依据=最后一条消息由客户发送，内容为无明确业务语义的长字符串（疑似乱码或系统数据），不属于任何触发类别。
+2026-08-22 18:00:01 | INFO    | src.main | 会话[260818ZM精致河南省郑州市中牟县大孟镇融创观澜壹号三期6-2-1102] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 18:00:01 | INFO    | src.main | 会话[260819W 精致母婴W上海闵行区浦锦] 进入LLM判定路径: 规则引擎预判=未触发 消息2条
+2026-08-22 18:00:01 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息2条 对话记录长度=191字符
+2026-08-22 18:00:01 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共970字符)
+2026-08-22 18:00:12 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:00:12 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=11420ms 响应长度=68字符
+2026-08-22 18:00:12 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=11421ms) 依据=客户回复表情表示确认和知晓，对话已达成一致/结束确认，无需智能体回复。
+2026-08-22 18:00:12 | INFO    | src.main | 会话[260819W 精致母婴W上海闵行区浦锦] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 18:00:12 | INFO    | src.main | 会话[260819ZM工装精致四川省成都市成华] 触发: type=construction_timeout intent=construction score=12.0 触发消息=@期。。。 感谢您选择清新全家进行治理\n这个是咱们后续的专属服务群，此群不会解散，您后续有任何问题都可以群内进行沟通\n群内有咱们各个部门的负责人员\n我是除...(共224字符)
+2026-08-22 18:00:12 | INFO    | src.main | 会话[260819ZM工装精致四川省成都市成华] 进入LLM判定路径: 规则引擎预判=construction_timeout 消息3条
+2026-08-22 18:00:12 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息13条 对话记录长度=575字符
+2026-08-22 18:00:12 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1365字符)
+2026-08-22 18:00:31 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:00:31 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=19508ms 响应长度=126字符
+2026-08-22 18:00:31 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=appointment_timeout 判定耗时=19509ms 依据=最后一条消息由角色标注为客户的发送者发出，内容涉及预约上门时间的变动与暂停，且之后无人回应，符合appointment_timeout触发条件。
+2026-08-22 18:00:31 | INFO    | src.main | 会话[260819ZM工装精致四川省成都市成华] LLM判定(appointment_timeout)与规则引擎预判(construction_timeout)不一致, 以LLM为准
+2026-08-22 18:00:31 | INFO    | src.main | 会话[260819ZM工装精致四川省成都市成华] 应用LLM判定响应: trigger=appointment_timeout 响应1条 at=['@师傅'] reply=师傅可能正在工作，我们已经提醒师傅尽快联系您~
+2026-08-22 18:00:31 | INFO    | src.main | 会话[260820ZM 精致上海国贸虹桥璟上云河璟庭4幢6号801] 进入LLM判定路径: 规则引擎预判=未触发 消息83条
+2026-08-22 18:00:31 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息84条 对话记录长度=4636字符
+2026-08-22 18:00:31 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共5497字符)
+2026-08-22 18:00:59 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:00:59 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=27637ms 响应长度=96字符
+2026-08-22 18:00:59 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=27638ms) 依据=最后一条消息由角色标注为客户的成员发送，内容为'好的'，属于对话达成一致/结束确认，因此判为none。
+2026-08-22 18:00:59 | INFO    | src.main | 会话[260820ZM 精致上海国贸虹桥璟上云河璟庭4幢6号801] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 18:00:59 | INFO    | src.main | 会话[260820ZM 精致北京市西城区马连道东街甲2号院2号楼1502] 进入LLM判定路径: 规则引擎预判=未触发 消息22条
+2026-08-22 18:00:59 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息22条 对话记录长度=1154字符
+2026-08-22 18:00:59 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1953字符)
+2026-08-22 18:01:29 | WARNING | src.llm.llm_client | LLM调用失败(异步, 第1/3次): 
+2026-08-22 18:01:53 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:01:53 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=54158ms 响应长度=78字符
+2026-08-22 18:01:53 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=54160ms) 依据=客户发送改期上门时间相关内容后，对方回复“好的”，对话已达成一致并结束确认，判为none。
+2026-08-22 18:01:53 | INFO    | src.main | 会话[260820ZM 精致北京市西城区马连道东街甲2号院2号楼1502] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 18:01:53 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] 进入LLM判定路径: 规则引擎预判=未触发 消息2条
+2026-08-22 18:01:53 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息2条 对话记录长度=134字符
+2026-08-22 18:01:53 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共913字符)
+2026-08-22 18:02:01 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:02:01 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=7915ms 响应长度=147字符
+2026-08-22 18:02:01 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=appointment_timeout 判定耗时=7916ms 依据=客户(孙振龙)发送了确认上门时间的消息'暂定上午8点半'，属于预约上门/确认上门时间相关内容，且该消息之后无其他成员回应，符合appointment_timeout触发条件。
+2026-08-22 18:02:01 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] LLM判定(appointment_timeout)与规则引擎预判(未触发)不一致, 以LLM为准
+2026-08-22 18:02:01 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] 应用LLM判定响应: trigger=appointment_timeout 响应1条 at=['@师傅'] reply=师傅可能正在工作，我们已经提醒师傅尽快联系您~
+2026-08-22 18:02:01 | INFO    | src.main | 会话[8.18高端北京市门头沟区京能西山印] 进入LLM判定路径: 规则引擎预判=未触发 消息14条
+2026-08-22 18:02:01 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息16条 对话记录长度=1209字符
+2026-08-22 18:02:01 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共2002字符)
+2026-08-22 18:02:17 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:02:17 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=15732ms 响应长度=85字符
+2026-08-22 18:02:17 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=15734ms) 依据=客户最后回复'好'，表示确认和同意，对话已达成一致并结束，无需触发智能客服回复。
+2026-08-22 18:02:17 | INFO    | src.main | 会话[8.18高端北京市门头沟区京能西山印] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 18:02:17 | INFO    | src.main | 会话[8.25高端 北京市西城区阳光丽景北] 进入LLM判定路径: 规则引擎预判=未触发 消息8条
+2026-08-22 18:02:17 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息8条 对话记录长度=861字符
+2026-08-22 18:02:17 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1646字符)
+2026-08-22 18:02:34 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:02:34 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=17077ms 响应长度=118字符
+2026-08-22 18:02:34 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=17078ms) 依据=最后一条消息是客户LCY的确认回复'好的收到'，属于对话结束确认。此前客户关于预约时间的消息已被工作人员和其他客户回应，不存在无人回应的超时情况。
+2026-08-22 18:02:34 | INFO    | src.main | 会话[8.25高端 北京市西城区阳光丽景北] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 18:02:34 | INFO    | src.main | 会话[LR26.8.18 精致 丰台区钟萃路 3 号院 2号楼2单元1301] 进入LLM判定路径: 规则引擎预判=未触发 消息4条
+2026-08-22 18:02:34 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息4条 对话记录长度=191字符
+2026-08-22 18:02:34 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共972字符)
+2026-08-22 18:02:52 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:02:52 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=18117ms 响应长度=108字符
+2026-08-22 18:02:52 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=construction_timeout 判定耗时=18117ms 依据=最后一条消息由客户发送，内容为“到了”，属于上门作业/现场施工相关内容，且之后无其他成员回应。
+2026-08-22 18:02:52 | INFO    | src.main | 会话[LR26.8.18 精致 丰台区钟萃路 3 号院 2号楼2单元1301] LLM判定(construction_timeout)与规则引擎预判(未触发)不一致, 以LLM为准
+2026-08-22 18:02:52 | INFO    | src.main | 会话[LR26.8.18 精致 丰台区钟萃路 3 号院 2号楼2单元1301] 应用LLM判定响应: trigger=construction_timeout 响应1条 at=['@销售'] reply=师傅可能正在工作，我们已经提醒师傅尽快联系您~
+2026-08-22 18:02:52 | INFO    | src.main | 会话[LR26.8.19精致 西城区东绒线胡同54号院内106室] 进入LLM判定路径: 规则引擎预判=未触发 消息5条
+2026-08-22 18:02:52 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息6条 对话记录长度=355字符
+2026-08-22 18:02:52 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1138字符)
+2026-08-22 18:03:03 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:03:03 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=11872ms 响应长度=101字符
+2026-08-22 18:03:03 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=11874ms) 依据=最后一条消息由工作人员(eng_head)发出，已对客户消息进行了回应，不符合'无人回应'的条件，判为none。
+2026-08-22 18:03:03 | INFO    | src.main | 会话[LR26.8.19精致 西城区东绒线胡同54号院内106室] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 18:03:03 | INFO    | src.main | 会话[LR26.8.22 精致 河北省承德市双桥区鼎峰·中瑞城38号楼2单元303] 进入LLM判定路径: 规则引擎预判=未触发 消息7条
+2026-08-22 18:03:03 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息26条 对话记录长度=879字符
+2026-08-22 18:03:03 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1682字符)
+2026-08-22 18:03:21 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:03:21 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=17628ms 响应长度=164字符
+2026-08-22 18:03:21 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=17629ms) 依据=最后一条消息由茱丽.耶(customer)发出，回复'好的，没问题'是对李晓建确认上门时间的回应，对话已达成一致。所有客户发送的消息均有后续回应，无无人回应情况；第一条订单信息由customer而非销售发送，不符合booking触发条件。
+2026-08-22 18:03:21 | INFO    | src.main | 会话[LR26.8.22 精致 河北省承德市双桥区鼎峰·中瑞城38号楼2单元303] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 18:03:21 | INFO    | src.main | 会话[LR26.8.23 高端 朝阳区小红门路朝阳·中建星光里5号楼1单元1702] 进入LLM判定路径: 规则引擎预判=未触发 消息11条
+2026-08-22 18:03:21 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息30条 对话记录长度=1119字符
+2026-08-22 18:03:21 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1926字符)
+2026-08-22 18:03:51 | WARNING | src.llm.llm_client | LLM调用失败(异步, 第1/3次): 
+2026-08-22 18:04:21 | WARNING | src.llm.llm_client | LLM调用失败(异步, 第2/3次): 
+2026-08-22 18:04:47 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:04:47 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=86021ms 响应长度=115字符
+2026-08-22 18:04:47 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=86022ms) 依据=最后一条消息由客户伊辰发出'好的'，属于结束确认类回复，对话已达成一致（上门时间已确认，施工注意事项已告知并获客户确认），无超时未回应情况。
+2026-08-22 18:04:47 | INFO    | src.main | 会话[LR26.8.23 高端 朝阳区小红门路朝阳·中建星光里5号楼1单元1702] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 18:04:47 | INFO    | src.main | 会话[企业微信团队] 进入LLM判定路径: 规则引擎预判=未触发 消息1条
+2026-08-22 18:04:47 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息1条 对话记录长度=54字符
+2026-08-22 18:04:47 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共832字符)
+2026-08-22 18:04:54 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:04:54 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=7210ms 响应长度=69字符
+2026-08-22 18:04:54 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=7212ms) 依据=消息内容为版本新功能介绍，属于无关内容，不满足任何触发条件。
+2026-08-22 18:04:54 | INFO    | src.main | 会话[企业微信团队] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 18:04:54 | INFO    | src.main | 文件处理完成: /app/input/1787391629.json 耗时=311315ms
+2026-08-22 18:04:54 | INFO    | src.api.task_manager | 任务结果已落盘: task_id=586f42754dff -> /app/output/1787391629_result.json
+2026-08-22 18:04:54 | INFO    | src.api.task_manager | 任务执行成功: task_id=586f42754dff 耗时=311332ms summary={'total': 13, 'triggered': 3} output=/app/output/1787391629_result.json
+2026-08-22 18:09:46 | INFO    | src.api.app | 服务启动: input_dir=/app/input output_dir=/app/output watcher.enabled=True
+2026-08-22 18:09:46 | INFO    | src.llm.llm_client | LLM配置加载完成: enabled=True provider=openai_compatible model=qwen3.7-plus base_url=https://dashscope.aliyuncs.com/compatible-mode/v1 api_key=已配置 temperature=0.5 max_tokens=512 timeout=30s retries=2
+2026-08-22 18:09:46 | INFO    | src.api.app | 输入文件夹监听已启动: /app/input -> http://127.0.0.1:8000
+2026-08-22 18:09:46 | INFO    | src.watcher | 开始监听输入文件夹: /app/input (间隔 2.0s)
+2026-08-22 18:10:23 | INFO    | src.api.app | 收到开始任务请求: input_file=(内联data)
+2026-08-22 18:10:23 | INFO    | src.api.task_manager | 任务已创建: task_id=d458e3f17754 来源=(内联data)
+2026-08-22 18:10:23 | INFO    | src.api.task_manager | 任务开始执行: task_id=d458e3f17754 来源=(内联data)
+2026-08-22 18:10:23 | INFO    | src.core.export_parser | 解析会话[用例1-已回应后追问]: 有效文本消息3条 过滤噪音消息0条 显式role标注3条 角色分布={'customer': 2, 'master': 1} 未获响应2条
+2026-08-22 18:10:23 | INFO    | src.core.export_parser | 解析会话[用例2-无人回应]: 有效文本消息1条 过滤噪音消息0条 显式role标注1条 角色分布={'customer': 1} 未获响应1条
+2026-08-22 18:10:23 | INFO    | src.core.export_parser | 解析会话[用例3-其他客户发言不算回应]: 有效文本消息2条 过滤噪音消息0条 显式role标注2条 角色分布={'customer': 2} 未获响应2条
+2026-08-22 18:10:23 | INFO    | src.main | 会话[用例1-已回应后追问] 进入LLM判定路径: 规则引擎预判=未触发 消息3条
+2026-08-22 18:10:23 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息3条 对话记录长度=156字符
+2026-08-22 18:10:23 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共999字符)
+2026-08-22 18:10:23 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=d458e3f17754 status=running
+2026-08-22 18:10:28 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=d458e3f17754 status=running
+2026-08-22 18:10:33 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=d458e3f17754 status=running
+2026-08-22 18:10:38 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=d458e3f17754 status=running
+2026-08-22 18:10:43 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=d458e3f17754 status=running
+2026-08-22 18:10:47 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:10:47 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=24006ms 响应长度=89字符
+2026-08-22 18:10:47 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=24039ms) 依据=客户改期诉求已被工作人员回应确认，后续要求带鞋套和工具属于追问或补充，视为诉求已被响应，判为none
+2026-08-22 18:10:47 | INFO    | src.main | 会话[用例1-已回应后追问] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 18:10:47 | INFO    | src.main | 会话[用例2-无人回应] 触发: type=appointment_timeout intent=appointment score=6.0 触发消息=明天上午可以过来治理吗？
+2026-08-22 18:10:47 | INFO    | src.main | 会话[用例2-无人回应] 进入LLM判定路径: 规则引擎预判=appointment_timeout 消息1条
+2026-08-22 18:10:47 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息1条 对话记录长度=49字符
+2026-08-22 18:10:47 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共890字符)
+2026-08-22 18:10:48 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=d458e3f17754 status=running
+2026-08-22 18:10:53 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=d458e3f17754 status=running
+2026-08-22 18:10:57 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:10:57 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=10032ms 响应长度=113字符
+2026-08-22 18:10:57 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=appointment_timeout 判定耗时=10033ms 依据=客户王小明询问明天上午是否可以上门治理，属于预约上门时间相关内容，且该消息为最后一条，之后无工作人员回应。
+2026-08-22 18:10:57 | INFO    | src.main | 会话[用例2-无人回应] 应用LLM判定响应: trigger=appointment_timeout 响应1条 at=['@师傅'] reply=师傅可能正在工作，我们已经提醒师傅尽快联系您~
+2026-08-22 18:10:57 | INFO    | src.main | 会话[用例3-其他客户发言不算回应] 触发: type=contract_timeout intent=contract score=5.0 触发消息=合同什么时候可以签？
+2026-08-22 18:10:57 | INFO    | src.main | 会话[用例3-其他客户发言不算回应] 进入LLM判定路径: 规则引擎预判=contract_timeout 消息2条
+2026-08-22 18:10:57 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息2条 对话记录长度=99字符
+2026-08-22 18:10:57 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共941字符)
+2026-08-22 18:10:58 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=d458e3f17754 status=running
+2026-08-22 18:11:03 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=d458e3f17754 status=running
+2026-08-22 18:11:04 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:11:04 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=7926ms 响应长度=125字符
+2026-08-22 18:11:04 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=contract_timeout 判定耗时=7928ms 依据=客户王小明发送了关于合同签约的询问（合同什么时候可以签），之后无工作人员回应，另一位客户的发言不算工作人员回应，属于合同相关超时未响应。
+2026-08-22 18:11:04 | INFO    | src.main | 会话[用例3-其他客户发言不算回应] 应用LLM判定响应: trigger=contract_timeout 响应1条 at=['@销售'] reply=关于合同的相关事项，销售会为您详细解答，我们已经联系销售尽快联系您~
+2026-08-22 18:11:04 | INFO    | src.api.task_manager | 任务执行成功: task_id=d458e3f17754 耗时=42015ms summary={'total': 3, 'triggered': 2} output=None
+2026-08-22 18:15:23 | INFO    | src.api.app | 服务启动: input_dir=/app/input output_dir=/app/output watcher.enabled=True
+2026-08-22 18:15:23 | INFO    | src.llm.llm_client | LLM配置加载完成: enabled=True provider=openai_compatible model=qwen3.7-plus base_url=https://dashscope.aliyuncs.com/compatible-mode/v1 api_key=已配置 temperature=0.5 max_tokens=512 timeout=30s retries=2
+2026-08-22 18:15:23 | INFO    | src.api.app | 输入文件夹监听已启动: /app/input -> http://127.0.0.1:8000
+2026-08-22 18:15:23 | INFO    | src.watcher | 开始监听输入文件夹: /app/input (间隔 2.0s)
+2026-08-22 18:15:32 | INFO    | src.api.app | 收到开始任务请求: input_file=(内联data)
+2026-08-22 18:15:32 | INFO    | src.api.task_manager | 任务已创建: task_id=2f44c24acc47 来源=(内联data)
+2026-08-22 18:15:32 | INFO    | src.api.task_manager | 任务开始执行: task_id=2f44c24acc47 来源=(内联data)
+2026-08-22 18:15:32 | INFO    | src.core.export_parser | 解析会话[时间戳标准验证-乱序输入]: 有效文本消息2条 过滤噪音消息0条 显式role标注2条 角色分布={'customer': 1, 'master': 1} 未获响应1条
+2026-08-22 18:15:32 | INFO    | src.main | 会话[时间戳标准验证-乱序输入] 进入LLM判定路径: 规则引擎预判=未触发 消息2条
+2026-08-22 18:15:32 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息2条 对话记录长度=107字符
+2026-08-22 18:15:32 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1019字符)
+2026-08-22 18:15:39 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:15:39 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=6726ms 响应长度=90字符
+2026-08-22 18:15:39 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=6762ms) 依据=客户发送了改期预约时间的消息，但随后工作人员霍师傅已经做出了确认回应，且最后一条消息由工作人员发出，诉求已被响应。
+2026-08-22 18:15:39 | INFO    | src.main | 会话[时间戳标准验证-乱序输入] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 18:15:39 | INFO    | src.api.task_manager | 任务执行成功: task_id=2f44c24acc47 耗时=6772ms summary={'total': 1, 'triggered': 0} output=None
+2026-08-22 18:20:51 | INFO    | src.api.app | 服务启动: input_dir=/app/input output_dir=/app/output watcher.enabled=True
+2026-08-22 18:20:51 | INFO    | src.llm.llm_client | LLM配置加载完成: enabled=True provider=openai_compatible model=qwen3.7-plus base_url=https://dashscope.aliyuncs.com/compatible-mode/v1 api_key=已配置 temperature=0.5 max_tokens=512 timeout=30s retries=2
+2026-08-22 18:20:51 | INFO    | src.api.app | 输入文件夹监听已启动: /app/input -> http://127.0.0.1:8000
+2026-08-22 18:20:51 | INFO    | src.watcher | 开始监听输入文件夹: /app/input (间隔 2.0s)
+2026-08-22 18:21:41 | INFO    | src.api.app | 收到开始任务请求: input_file=1787391629.json
+2026-08-22 18:21:41 | INFO    | src.api.task_manager | 任务已创建: task_id=5651846f5734 来源=1787391629.json
+2026-08-22 18:21:41 | INFO    | src.api.task_manager | 任务开始执行: task_id=5651846f5734 来源=1787391629.json
+2026-08-22 18:21:42 | INFO    | src.main | 开始异步处理文件: /app/input/1787391629.json
+2026-08-22 18:21:42 | INFO    | src.core.export_parser | 解析会话[260818ZM精致河南省郑州市中牟县大孟镇融创观澜壹号三期6-2-1102]: 有效文本消息70条 过滤噪音消息1条 显式role标注71条 角色分布={'customer': 70} 未获响应70条
+2026-08-22 18:21:42 | INFO    | src.core.export_parser | 解析会话[260819W 精致母婴W上海闵行区浦锦]: 有效文本消息2条 过滤噪音消息0条 显式role标注2条 角色分布={'除醛师': 1, 'customer': 1} 未获响应2条
+2026-08-22 18:21:42 | INFO    | src.core.export_parser | 解析会话[260819ZM工装精致四川省成都市成华]: 有效文本消息3条 过滤噪音消息2条 显式role标注5条 角色分布={'sales': 2, 'customer': 1} 未获响应2条
+2026-08-22 18:21:42 | INFO    | src.core.export_parser | 解析会话[260820ZM 精致上海国贸虹桥璟上云河璟庭4幢6号801]: 有效文本消息83条 过滤噪音消息2条 显式role标注85条 角色分布={'customer': 78, 'eng_head': 5} 未获响应72条
+2026-08-22 18:21:42 | INFO    | src.core.export_parser | 解析会话[260820ZM 精致北京市西城区马连道东街甲2号院2号楼1502]: 有效文本消息22条 过滤噪音消息1条 显式role标注23条 角色分布={'customer': 22} 未获响应22条
+2026-08-22 18:21:42 | INFO    | src.core.export_parser | 解析会话[260822W精致母婴W海淀区太阳园6号楼东]: 有效文本消息2条 过滤噪音消息1条 显式role标注3条 角色分布={'除醛师': 1, 'customer': 1} 未获响应2条
+2026-08-22 18:21:42 | INFO    | src.core.export_parser | 解析会话[8.18高端北京市门头沟区京能西山印]: 有效文本消息14条 过滤噪音消息65条 显式role标注79条 角色分布={'customer': 14} 未获响应14条
+2026-08-22 18:21:42 | INFO    | src.core.export_parser | 解析会话[8.25高端 北京市西城区阳光丽景北]: 有效文本消息8条 过滤噪音消息3条 显式role标注11条 角色分布={'除醛师': 4, 'customer': 4} 未获响应2条
+2026-08-22 18:21:42 | INFO    | src.core.export_parser | 解析会话[LR26.8.18 精致 丰台区钟萃路 3 号院 2号楼2单元1301]: 有效文本消息4条 过滤噪音消息0条 显式role标注4条 角色分布={'customer': 4} 未获响应4条
+2026-08-22 18:21:42 | INFO    | src.core.export_parser | 解析会话[LR26.8.19精致 西城区东绒线胡同54号院内106室]: 有效文本消息5条 过滤噪音消息1条 显式role标注6条 角色分布={'eng_head': 3, 'customer': 2} 未获响应1条
+2026-08-22 18:21:42 | INFO    | src.core.export_parser | 解析会话[LR26.8.22 精致 河北省承德市双桥区鼎峰·中瑞城38号楼2单元303]: 有效文本消息7条 过滤噪音消息2条 显式role标注9条 角色分布={'customer': 7} 未获响应7条
+2026-08-22 18:21:42 | INFO    | src.core.export_parser | 解析会话[LR26.8.23 高端 朝阳区小红门路朝阳·中建星光里5号楼1单元1702]: 有效文本消息11条 过滤噪音消息2条 显式role标注13条 角色分布={'customer': 11} 未获响应11条
+2026-08-22 18:21:42 | INFO    | src.core.export_parser | 解析会话[企业微信团队]: 有效文本消息1条 过滤噪音消息0条 显式role标注1条 角色分布={'customer': 1} 未获响应1条
+2026-08-22 18:21:42 | INFO    | src.main | 会话[260818ZM精致河南省郑州市中牟县大孟镇融创观澜壹号三期6-2-1102] 进入LLM判定路径: 规则引擎预判=未触发 消息70条
+2026-08-22 18:21:42 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息70条 对话记录长度=13143字符
+2026-08-22 18:21:42 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共14123字符)
+2026-08-22 18:22:12 | WARNING | src.llm.llm_client | LLM调用失败(异步, 第1/3次): 
+2026-08-22 18:22:42 | WARNING | src.llm.llm_client | LLM调用失败(异步, 第2/3次): 
+2026-08-22 18:23:12 | WARNING | src.llm.llm_client | LLM调用失败(异步, 第3/3次): 
+2026-08-22 18:23:12 | ERROR   | src.llm.llm_client | LLM调用最终失败(异步): 共3次尝试, 最后错误=
+2026-08-22 18:23:12 | WARNING | src.main | 会话[260818ZM精致河南省郑州市中牟县大孟镇融创观澜壹号三期6-2-1102] LLM判定失败, 降级规则引擎结果: LLM 调用最终失败: 
+2026-08-22 18:23:12 | INFO    | src.main | 会话[260819W 精致母婴W上海闵行区浦锦] 进入LLM判定路径: 规则引擎预判=未触发 消息2条
+2026-08-22 18:23:12 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息2条 对话记录长度=191字符
+2026-08-22 18:23:12 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1103字符)
+2026-08-22 18:23:23 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:23:23 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=11514ms 响应长度=110字符
+2026-08-22 18:23:23 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=11520ms) 依据=最后一条消息是客户回复的👌🏻表情，属于对工作人员上门通知的确认/知悉，等同于回复'好''知道了'，视为诉求已被响应，无需智能体回复
+2026-08-22 18:23:23 | INFO    | src.main | 会话[260819W 精致母婴W上海闵行区浦锦] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 18:23:23 | INFO    | src.main | 会话[260819ZM工装精致四川省成都市成华] 进入LLM判定路径: 规则引擎预判=未触发 消息3条
+2026-08-22 18:23:23 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息13条 对话记录长度=569字符
+2026-08-22 18:23:23 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1492字符)
+2026-08-22 18:23:37 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:23:37 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=14481ms 响应长度=119字符
+2026-08-22 18:23:37 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=appointment_timeout 判定耗时=14483ms 依据=客户发送'有变动，先暂停哈'，涉及预约上门时间变更/暂停相关内容，且该消息（16:39:44）之后无任何工作人员回应。
+2026-08-22 18:23:37 | INFO    | src.main | 会话[260819ZM工装精致四川省成都市成华] LLM判定(appointment_timeout)与规则引擎预判(未触发)不一致, 以LLM为准
+2026-08-22 18:23:37 | INFO    | src.main | 会话[260819ZM工装精致四川省成都市成华] 应用LLM判定响应: trigger=appointment_timeout 响应1条 at=['@师傅'] reply=师傅可能正在工作，我们已经提醒师傅尽快联系您~
+2026-08-22 18:23:37 | INFO    | src.main | 会话[260820ZM 精致上海国贸虹桥璟上云河璟庭4幢6号801] 触发: type=construction_timeout intent=construction score=5.0 触发消息=换个说法，除醛结束后，复检结束后，我不保洁，是不是也可以直接入住
+2026-08-22 18:23:37 | INFO    | src.main | 会话[260820ZM 精致上海国贸虹桥璟上云河璟庭4幢6号801] 进入LLM判定路径: 规则引擎预判=construction_timeout 消息83条
+2026-08-22 18:23:37 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息84条 对话记录长度=4636字符
+2026-08-22 18:23:37 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共5630字符)
+2026-08-22 18:24:07 | WARNING | src.llm.llm_client | LLM调用失败(异步, 第1/3次): 
+2026-08-22 18:24:37 | WARNING | src.llm.llm_client | LLM调用失败(异步, 第2/3次): 
+2026-08-22 18:25:07 | WARNING | src.llm.llm_client | LLM调用失败(异步, 第3/3次): 
+2026-08-22 18:25:07 | ERROR   | src.llm.llm_client | LLM调用最终失败(异步): 共3次尝试, 最后错误=
+2026-08-22 18:25:07 | WARNING | src.main | 会话[260820ZM 精致上海国贸虹桥璟上云河璟庭4幢6号801] LLM判定失败, 降级规则引擎结果: LLM 调用最终失败: 
+2026-08-22 18:25:07 | INFO    | src.main | 会话[260820ZM 精致北京市西城区马连道东街甲2号院2号楼1502] 触发: type=construction_timeout intent=construction score=4.0 触发消息=那治理后多久可以入住
+2026-08-22 18:25:07 | INFO    | src.main | 会话[260820ZM 精致北京市西城区马连道东街甲2号院2号楼1502] 进入LLM判定路径: 规则引擎预判=construction_timeout 消息22条
+2026-08-22 18:25:07 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息22条 对话记录长度=1154字符
+2026-08-22 18:25:07 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共2086字符)
+2026-08-22 18:25:37 | WARNING | src.llm.llm_client | LLM调用失败(异步, 第1/3次): 
+2026-08-22 18:26:03 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:26:03 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=55598ms 响应长度=147字符
+2026-08-22 18:26:03 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=55599ms) 依据=所有发言者的角色标注均为customer，没有工作人员参与对话。根据规则，最后一条消息由工作人员发出才可能触发，且所有触发条件都涉及客户发送内容后无工作人员回应的情况。本群无工作人员，不满足任何触发条件。
+2026-08-22 18:26:03 | INFO    | src.main | 会话[260820ZM 精致北京市西城区马连道东街甲2号院2号楼1502] 规则引擎曾触发(construction_timeout), 但LLM判定无需回复, 不回复
+2026-08-22 18:26:03 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] 进入LLM判定路径: 规则引擎预判=未触发 消息2条
+2026-08-22 18:26:03 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息2条 对话记录长度=134字符
+2026-08-22 18:26:03 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1046字符)
+2026-08-22 18:26:22 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:26:22 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=19133ms 响应长度=126字符
+2026-08-22 18:26:22 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=appointment_timeout 判定耗时=19134ms 依据=客户孙振龙(customer)发送了确认上门时间的消息'暂定上午8点半'，属于预约上门时间相关内容，且该消息之后无任何工作人员回应。
+2026-08-22 18:26:22 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] LLM判定(appointment_timeout)与规则引擎预判(未触发)不一致, 以LLM为准
+2026-08-22 18:26:22 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] 应用LLM判定响应: trigger=appointment_timeout 响应1条 at=['@师傅'] reply=师傅可能正在工作，我们已经提醒师傅尽快联系您~
+2026-08-22 18:26:22 | INFO    | src.main | 会话[8.18高端北京市门头沟区京能西山印] 触发: type=construction_timeout intent=construction score=8.0 触发消息=【治理后】：1.密闭门窗12-24小时 2.密闭12小时后，开窗通风三天（务必） 3.通风三到五天后用湿毛巾擦拭我们所治理过的家具表面 4.治理后第五天提前预约...(共245字符)
+2026-08-22 18:26:22 | INFO    | src.main | 会话[8.18高端北京市门头沟区京能西山印] 进入LLM判定路径: 规则引擎预判=construction_timeout 消息14条
+2026-08-22 18:26:22 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息16条 对话记录长度=1209字符
+2026-08-22 18:26:22 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共2135字符)
+2026-08-22 18:26:52 | WARNING | src.llm.llm_client | LLM调用失败(异步, 第1/3次): 
+2026-08-22 18:27:21 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:27:21 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=59464ms 响应长度=85字符
+2026-08-22 18:27:21 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=59465ms) 依据=最后一条消息为客户回复“好”，属于客户自己确认结束，且关于复检时间的预约已沟通确认完毕，无未响应的诉求。
+2026-08-22 18:27:21 | INFO    | src.main | 会话[8.18高端北京市门头沟区京能西山印] 规则引擎曾触发(construction_timeout), 但LLM判定无需回复, 不回复
+2026-08-22 18:27:21 | INFO    | src.main | 会话[8.25高端 北京市西城区阳光丽景北] 进入LLM判定路径: 规则引擎预判=未触发 消息8条
+2026-08-22 18:27:21 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息8条 对话记录长度=861字符
+2026-08-22 18:27:21 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1779字符)
+2026-08-22 18:27:44 | INFO    | src.api.app | 服务启动: input_dir=/app/input output_dir=/app/output watcher.enabled=True
+2026-08-22 18:27:44 | INFO    | src.llm.llm_client | LLM配置加载完成: enabled=True provider=openai_compatible model=qwen3.7-plus base_url=https://dashscope.aliyuncs.com/compatible-mode/v1 api_key=已配置 temperature=0.5 max_tokens=512 timeout=30s retries=2
+2026-08-22 18:27:44 | INFO    | src.api.app | 输入文件夹监听已启动: /app/input -> http://127.0.0.1:8000
+2026-08-22 18:27:44 | INFO    | src.watcher | 开始监听输入文件夹: /app/input (间隔 2.0s)
+2026-08-22 18:27:47 | WARNING | src.api.app | 状态查询失败: 任务不存在 task_id=5651846f5734
+2026-08-22 18:27:50 | WARNING | src.api.app | 状态查询失败: 任务不存在 task_id=5651846f5734
+2026-08-22 18:27:59 | WARNING | src.api.app | 状态查询失败: 任务不存在 task_id=5651846f5734
+2026-08-22 18:28:24 | INFO    | src.api.app | 服务启动: input_dir=/app/input output_dir=/app/output watcher.enabled=True
+2026-08-22 18:28:24 | INFO    | src.llm.llm_client | LLM配置加载完成: enabled=True provider=openai_compatible model=qwen3.7-plus base_url=https://dashscope.aliyuncs.com/compatible-mode/v1 api_key=已配置 temperature=0.5 max_tokens=512 timeout=120s retries=2
+2026-08-22 18:28:24 | INFO    | src.api.app | 输入文件夹监听已启动: /app/input -> http://127.0.0.1:8000
+2026-08-22 18:28:24 | INFO    | src.watcher | 开始监听输入文件夹: /app/input (间隔 2.0s)
+2026-08-22 18:28:34 | INFO    | src.api.app | 收到开始任务请求: input_file=1787391629.json
+2026-08-22 18:28:34 | INFO    | src.api.task_manager | 任务已创建: task_id=897ab5d98bca 来源=1787391629.json
+2026-08-22 18:28:34 | INFO    | src.api.task_manager | 任务开始执行: task_id=897ab5d98bca 来源=1787391629.json
+2026-08-22 18:28:34 | INFO    | src.main | 开始异步处理文件: /app/input/1787391629.json
+2026-08-22 18:28:34 | INFO    | src.core.export_parser | 解析会话[260818ZM精致河南省郑州市中牟县大孟镇融创观澜壹号三期6-2-1102]: 有效文本消息70条 过滤噪音消息1条 显式role标注71条 角色分布={'customer': 70} 未获响应70条
+2026-08-22 18:28:34 | INFO    | src.core.export_parser | 解析会话[260819W 精致母婴W上海闵行区浦锦]: 有效文本消息2条 过滤噪音消息0条 显式role标注2条 角色分布={'除醛师': 1, 'customer': 1} 未获响应2条
+2026-08-22 18:28:34 | INFO    | src.core.export_parser | 解析会话[260819ZM工装精致四川省成都市成华]: 有效文本消息3条 过滤噪音消息2条 显式role标注5条 角色分布={'sales': 2, 'customer': 1} 未获响应2条
+2026-08-22 18:28:34 | INFO    | src.core.export_parser | 解析会话[260820ZM 精致上海国贸虹桥璟上云河璟庭4幢6号801]: 有效文本消息83条 过滤噪音消息2条 显式role标注85条 角色分布={'customer': 78, 'eng_head': 5} 未获响应72条
+2026-08-22 18:28:34 | INFO    | src.core.export_parser | 解析会话[260820ZM 精致北京市西城区马连道东街甲2号院2号楼1502]: 有效文本消息22条 过滤噪音消息1条 显式role标注23条 角色分布={'customer': 22} 未获响应22条
+2026-08-22 18:28:34 | INFO    | src.core.export_parser | 解析会话[260822W精致母婴W海淀区太阳园6号楼东]: 有效文本消息2条 过滤噪音消息1条 显式role标注3条 角色分布={'除醛师': 1, 'customer': 1} 未获响应2条
+2026-08-22 18:28:34 | INFO    | src.core.export_parser | 解析会话[8.18高端北京市门头沟区京能西山印]: 有效文本消息14条 过滤噪音消息65条 显式role标注79条 角色分布={'customer': 14} 未获响应14条
+2026-08-22 18:28:34 | INFO    | src.core.export_parser | 解析会话[8.25高端 北京市西城区阳光丽景北]: 有效文本消息8条 过滤噪音消息3条 显式role标注11条 角色分布={'除醛师': 4, 'customer': 4} 未获响应2条
+2026-08-22 18:28:34 | INFO    | src.core.export_parser | 解析会话[LR26.8.18 精致 丰台区钟萃路 3 号院 2号楼2单元1301]: 有效文本消息4条 过滤噪音消息0条 显式role标注4条 角色分布={'customer': 4} 未获响应4条
+2026-08-22 18:28:34 | INFO    | src.core.export_parser | 解析会话[LR26.8.19精致 西城区东绒线胡同54号院内106室]: 有效文本消息5条 过滤噪音消息1条 显式role标注6条 角色分布={'eng_head': 3, 'customer': 2} 未获响应1条
+2026-08-22 18:28:34 | INFO    | src.core.export_parser | 解析会话[LR26.8.22 精致 河北省承德市双桥区鼎峰·中瑞城38号楼2单元303]: 有效文本消息7条 过滤噪音消息2条 显式role标注9条 角色分布={'customer': 7} 未获响应7条
+2026-08-22 18:28:34 | INFO    | src.core.export_parser | 解析会话[LR26.8.23 高端 朝阳区小红门路朝阳·中建星光里5号楼1单元1702]: 有效文本消息11条 过滤噪音消息2条 显式role标注13条 角色分布={'customer': 11} 未获响应11条
+2026-08-22 18:28:34 | INFO    | src.core.export_parser | 解析会话[企业微信团队]: 有效文本消息1条 过滤噪音消息0条 显式role标注1条 角色分布={'customer': 1} 未获响应1条
+2026-08-22 18:28:34 | INFO    | src.main | 会话[260818ZM精致河南省郑州市中牟县大孟镇融创观澜壹号三期6-2-1102] 进入LLM判定路径: 规则引擎预判=未触发 消息70条
+2026-08-22 18:28:34 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息70条 对话记录长度=13143字符
+2026-08-22 18:28:34 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共14123字符)
+2026-08-22 18:29:11 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:29:11 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=37243ms 响应长度=110字符
+2026-08-22 18:29:11 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=37296ms) 依据=所有消息发送者角色均标注为客户，内容多为链接/乱码或客户间的简短交流，无明确的预约、合同、施工、药剂等需要智能客服响应的超时诉求。
+2026-08-22 18:29:11 | INFO    | src.main | 会话[260818ZM精致河南省郑州市中牟县大孟镇融创观澜壹号三期6-2-1102] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 18:29:11 | INFO    | src.main | 会话[260819W 精致母婴W上海闵行区浦锦] 进入LLM判定路径: 规则引擎预判=未触发 消息2条
+2026-08-22 18:29:11 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息2条 对话记录长度=191字符
+2026-08-22 18:29:11 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1103字符)
+2026-08-22 18:29:15 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=897ab5d98bca status=running
+2026-08-22 18:29:24 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:29:24 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=13143ms 响应长度=89字符
+2026-08-22 18:29:24 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=13145ms) 依据=工作人员已发送上门时间通知，客户回复表情表示确认，属于客户自己确认结束，无需智能体回复。
+2026-08-22 18:29:24 | INFO    | src.main | 会话[260819W 精致母婴W上海闵行区浦锦] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 18:29:24 | INFO    | src.main | 会话[260819ZM工装精致四川省成都市成华] 进入LLM判定路径: 规则引擎预判=未触发 消息3条
+2026-08-22 18:29:24 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息13条 对话记录长度=569字符
+2026-08-22 18:29:24 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1492字符)
+2026-08-22 18:29:37 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:29:37 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=12846ms 响应长度=137字符
+2026-08-22 18:29:37 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=appointment_timeout 判定耗时=12848ms 依据=客户最后一条消息表示'有变动，先暂停哈'，属于预约改期/暂停相关内容，且该消息之后无任何工作人员回应，符合appointment_timeout触发条件。
+2026-08-22 18:29:37 | INFO    | src.main | 会话[260819ZM工装精致四川省成都市成华] LLM判定(appointment_timeout)与规则引擎预判(未触发)不一致, 以LLM为准
+2026-08-22 18:29:37 | INFO    | src.main | 会话[260819ZM工装精致四川省成都市成华] 应用LLM判定响应: trigger=appointment_timeout 响应1条 at=['@师傅'] reply=师傅可能正在工作，我们已经提醒师傅尽快联系您~
+2026-08-22 18:29:37 | INFO    | src.main | 会话[260820ZM 精致上海国贸虹桥璟上云河璟庭4幢6号801] 触发: type=construction_timeout intent=construction score=5.0 触发消息=换个说法，除醛结束后，复检结束后，我不保洁，是不是也可以直接入住
+2026-08-22 18:29:37 | INFO    | src.main | 会话[260820ZM 精致上海国贸虹桥璟上云河璟庭4幢6号801] 进入LLM判定路径: 规则引擎预判=construction_timeout 消息83条
+2026-08-22 18:29:37 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息84条 对话记录长度=4636字符
+2026-08-22 18:29:37 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共5630字符)
+2026-08-22 18:30:37 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:30:37 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=60772ms 响应长度=95字符
+2026-08-22 18:30:37 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=60774ms) 依据=最后一条消息为客户回复的“好的”，属于客户确认结束对话；且此前关于预约上门时间的诉求已被响应并达成一致，无未响应的超时诉求。
+2026-08-22 18:30:37 | INFO    | src.main | 会话[260820ZM 精致上海国贸虹桥璟上云河璟庭4幢6号801] 规则引擎曾触发(construction_timeout), 但LLM判定无需回复, 不回复
+2026-08-22 18:30:37 | INFO    | src.main | 会话[260820ZM 精致北京市西城区马连道东街甲2号院2号楼1502] 触发: type=construction_timeout intent=construction score=4.0 触发消息=那治理后多久可以入住
+2026-08-22 18:30:37 | INFO    | src.main | 会话[260820ZM 精致北京市西城区马连道东街甲2号院2号楼1502] 进入LLM判定路径: 规则引擎预判=construction_timeout 消息22条
+2026-08-22 18:30:37 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息22条 对话记录长度=1154字符
+2026-08-22 18:30:37 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共2086字符)
+2026-08-22 18:31:15 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:31:15 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=38674ms 响应长度=128字符
+2026-08-22 18:31:15 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=appointment_timeout 判定耗时=38675ms 依据=客户发送了修改/确认上门时间相关内容（如“要不还是九点吧”、“九点吧”），且后续聊天记录中无工作人员回应（所有发言者角色均标注为客户）。
+2026-08-22 18:31:15 | INFO    | src.main | 会话[260820ZM 精致北京市西城区马连道东街甲2号院2号楼1502] LLM判定(appointment_timeout)与规则引擎预判(construction_timeout)不一致, 以LLM为准
+2026-08-22 18:31:15 | INFO    | src.main | 会话[260820ZM 精致北京市西城区马连道东街甲2号院2号楼1502] 应用LLM判定响应: trigger=appointment_timeout 响应1条 at=['@师傅'] reply=师傅可能正在工作，我们已经提醒师傅尽快联系您~
+2026-08-22 18:31:15 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] 进入LLM判定路径: 规则引擎预判=未触发 消息2条
+2026-08-22 18:31:15 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息2条 对话记录长度=134字符
+2026-08-22 18:31:15 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1046字符)
+2026-08-22 18:31:37 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:31:37 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=21932ms 响应长度=146字符
+2026-08-22 18:31:37 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=appointment_timeout 判定耗时=21933ms 依据=孙振龙角色标注为客户，其发送'暂定上午8点半'属于确认上门时间相关内容，且该消息为最后一条消息，之后无任何工作人员回应，符合appointment_timeout触发条件。
+2026-08-22 18:31:37 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] LLM判定(appointment_timeout)与规则引擎预判(未触发)不一致, 以LLM为准
+2026-08-22 18:31:37 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] 应用LLM判定响应: trigger=appointment_timeout 响应1条 at=['@师傅'] reply=师傅可能正在工作，我们已经提醒师傅尽快联系您~
+2026-08-22 18:31:37 | INFO    | src.main | 会话[8.18高端北京市门头沟区京能西山印] 触发: type=construction_timeout intent=construction score=8.0 触发消息=【治理后】：1.密闭门窗12-24小时 2.密闭12小时后，开窗通风三天（务必） 3.通风三到五天后用湿毛巾擦拭我们所治理过的家具表面 4.治理后第五天提前预约...(共245字符)
+2026-08-22 18:31:37 | INFO    | src.main | 会话[8.18高端北京市门头沟区京能西山印] 进入LLM判定路径: 规则引擎预判=construction_timeout 消息14条
+2026-08-22 18:31:37 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息16条 对话记录长度=1209字符
+2026-08-22 18:31:37 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共2135字符)
+2026-08-22 18:32:16 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:32:16 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=38497ms 响应长度=65字符
+2026-08-22 18:32:16 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=38498ms) 依据=最后一条消息为客户回复'好'，属于客户自己确认结束，判为none
+2026-08-22 18:32:16 | INFO    | src.main | 会话[8.18高端北京市门头沟区京能西山印] 规则引擎曾触发(construction_timeout), 但LLM判定无需回复, 不回复
+2026-08-22 18:32:16 | INFO    | src.main | 会话[8.25高端 北京市西城区阳光丽景北] 进入LLM判定路径: 规则引擎预判=未触发 消息8条
+2026-08-22 18:32:16 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息8条 对话记录长度=861字符
+2026-08-22 18:32:16 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1779字符)
+2026-08-22 18:32:39 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:32:39 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=23334ms 响应长度=137字符
+2026-08-22 18:32:39 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=23335ms) 依据=客户LCY在18:22:30发送了预约时间相关内容，但工作人员在18:23:32已做出回应（介绍自己和杨师傅），诉求已被响应；且客户最后一条消息为'好的收到'属于确认结束，判为none
+2026-08-22 18:32:39 | INFO    | src.main | 会话[8.25高端 北京市西城区阳光丽景北] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 18:32:39 | INFO    | src.main | 会话[LR26.8.18 精致 丰台区钟萃路 3 号院 2号楼2单元1301] 进入LLM判定路径: 规则引擎预判=未触发 消息4条
+2026-08-22 18:32:39 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息4条 对话记录长度=191字符
+2026-08-22 18:32:39 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1105字符)
+2026-08-22 18:32:51 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=897ab5d98bca status=running
+2026-08-22 18:33:28 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:33:28 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=49123ms 响应长度=141字符
+2026-08-22 18:33:28 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=construction_timeout 判定耗时=49125ms 依据=客户发送了多条关于到达现场/上门作业准备的消息（'我到家了，您随时可以来'、'我也楼下'、'到了'），属于现场施工/上门作业相关内容，且之后无任何工作人员回应。
+2026-08-22 18:33:28 | INFO    | src.main | 会话[LR26.8.18 精致 丰台区钟萃路 3 号院 2号楼2单元1301] LLM判定(construction_timeout)与规则引擎预判(未触发)不一致, 以LLM为准
+2026-08-22 18:33:28 | INFO    | src.main | 会话[LR26.8.18 精致 丰台区钟萃路 3 号院 2号楼2单元1301] 应用LLM判定响应: trigger=construction_timeout 响应1条 at=['@销售'] reply=师傅可能正在工作，我们已经提醒师傅尽快联系您~
+2026-08-22 18:33:28 | INFO    | src.main | 会话[LR26.8.19精致 西城区东绒线胡同54号院内106室] 进入LLM判定路径: 规则引擎预判=未触发 消息5条
+2026-08-22 18:33:28 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息6条 对话记录长度=355字符
+2026-08-22 18:33:28 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1271字符)
+2026-08-22 18:33:43 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:33:43 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=15224ms 响应长度=85字符
+2026-08-22 18:33:43 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=15226ms) 依据=最后一条消息由工作人员发出，且客户关于确认上门时间的诉求已被工作人员回应，视为诉求已被响应。
+2026-08-22 18:33:43 | INFO    | src.main | 会话[LR26.8.19精致 西城区东绒线胡同54号院内106室] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 18:33:43 | INFO    | src.main | 会话[LR26.8.22 精致 河北省承德市双桥区鼎峰·中瑞城38号楼2单元303] 触发: type=construction_timeout intent=construction score=12.0 触发消息=感谢您选择清新全家进行治理\n这个是咱们后续的专属服务群，此群不会解散，您后续有任何问题都可以群内进行沟通\n群内有咱们各个部门的负责人员\n我是除醛顾问，负责...(共224字符)
+2026-08-22 18:33:43 | INFO    | src.main | 会话[LR26.8.22 精致 河北省承德市双桥区鼎峰·中瑞城38号楼2单元303] 进入LLM判定路径: 规则引擎预判=construction_timeout 消息7条
+2026-08-22 18:33:43 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息26条 对话记录长度=879字符
+2026-08-22 18:33:43 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1815字符)
+2026-08-22 18:34:44 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:34:44 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=61345ms 响应长度=202字符
+2026-08-22 18:34:44 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=appointment_timeout 判定耗时=61347ms 依据=客户李晓建(角色标注为customer)发送了确认上门时间的消息('22号上午11点左右我可以到')，客户李然也发送了确认上门时间相关内容。此后仅有其他客户(茱丽.耶)回复'好的，没问题'，无任何工作人员(角色标注非客户)进行回应，符合appointment_timeout触发条件。
+2026-08-22 18:34:44 | INFO    | src.main | 会话[LR26.8.22 精致 河北省承德市双桥区鼎峰·中瑞城38号楼2单元303] LLM判定(appointment_timeout)与规则引擎预判(construction_timeout)不一致, 以LLM为准
+2026-08-22 18:34:44 | INFO    | src.main | 会话[LR26.8.22 精致 河北省承德市双桥区鼎峰·中瑞城38号楼2单元303] 应用LLM判定响应: trigger=appointment_timeout 响应1条 at=['@师傅'] reply=师傅可能正在工作，我们已经提醒师傅尽快联系您~
+2026-08-22 18:34:44 | INFO    | src.main | 会话[LR26.8.23 高端 朝阳区小红门路朝阳·中建星光里5号楼1单元1702] 触发: type=construction_timeout intent=construction score=12.0 触发消息=感谢您选择清新全家进行治理\n这个是咱们后续的专属服务群，此群不会解散，您后续有任何问题都可以群内进行沟通\n群内有咱们各个部门的负责人员\n我是除醛顾问，负责...(共236字符)
+2026-08-22 18:34:44 | INFO    | src.main | 会话[LR26.8.23 高端 朝阳区小红门路朝阳·中建星光里5号楼1单元1702] 进入LLM判定路径: 规则引擎预判=construction_timeout 消息11条
+2026-08-22 18:34:44 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息30条 对话记录长度=1119字符
+2026-08-22 18:34:44 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共2059字符)
+2026-08-22 18:35:38 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:35:38 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=54670ms 响应长度=142字符
+2026-08-22 18:35:38 | WARNING | src.llm.llm_client | LLM全量判定: 输出无法解析为JSON. 原始输出=```json\n{"trigger": "none", "reason": "最后一条消息是客户伊辰回复"好的"，属于客户确认结束的回复。整个预约上门流程已完成：路东提出周日上门时间，伊辰回复"可以的"确认，路东发送施工提醒后伊辰回复"好的"表示知悉，无未响应的客户诉求。"}\n```
+2026-08-22 18:35:38 | WARNING | src.main | 会话[LR26.8.23 高端 朝阳区小红门路朝阳·中建星光里5号楼1单元1702] LLM判定失败, 降级规则引擎结果: LLM 判定输出无法解析: ```json\n{"trigger": "none", "reason": "最后一条消息是客户伊辰回复"好的"，属于客户确认结束的回复。整个预约上门流程已完成：路东提出周日上门时间，伊辰回复"可以...(共144字符)
+2026-08-22 18:35:38 | INFO    | src.main | 会话[企业微信团队] 进入LLM判定路径: 规则引擎预判=未触发 消息1条
+2026-08-22 18:35:38 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息1条 对话记录长度=54字符
+2026-08-22 18:35:38 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共965字符)
+2026-08-22 18:35:48 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:35:48 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=9718ms 响应长度=101字符
+2026-08-22 18:35:48 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=9720ms) 依据=该消息为企业微信系统版本更新通知，属于无关/系统通知内容，不涉及预约、合同、施工、药剂等任何触发类别的客户诉求。
+2026-08-22 18:35:48 | INFO    | src.main | 会话[企业微信团队] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 18:35:48 | INFO    | src.main | 文件处理完成: /app/input/1787391629.json 耗时=436647ms
+2026-08-22 18:35:48 | INFO    | src.api.task_manager | 任务结果已落盘: task_id=897ab5d98bca -> /app/output/1787391629_result.json
+2026-08-22 18:35:48 | INFO    | src.api.task_manager | 任务执行成功: task_id=897ab5d98bca 耗时=436674ms summary={'total': 13, 'triggered': 6} output=/app/output/1787391629_result.json
+2026-08-22 18:35:56 | INFO    | src.api.app | 服务启动: input_dir=/app/input output_dir=/app/output watcher.enabled=True
+2026-08-22 18:35:56 | INFO    | src.llm.llm_client | LLM配置加载完成: enabled=True provider=openai_compatible model=qwen3.7-plus base_url=https://dashscope.aliyuncs.com/compatible-mode/v1 api_key=已配置 temperature=0.5 max_tokens=512 timeout=120s retries=2
+2026-08-22 18:35:56 | INFO    | src.api.app | 输入文件夹监听已启动: /app/input -> http://127.0.0.1:8000
+2026-08-22 18:35:56 | INFO    | src.watcher | 开始监听输入文件夹: /app/input (间隔 2.0s)
+2026-08-22 18:37:17 | WARNING | src.api.app | 结果查询失败: 任务不存在 task_id=897ab5d98bca
+2026-08-22 18:38:16 | INFO    | src.api.app | 收到开始任务请求: input_file=1787391629.json
+2026-08-22 18:38:16 | INFO    | src.api.task_manager | 任务已创建: task_id=f6d11c1f1ae0 来源=1787391629.json
+2026-08-22 18:38:16 | INFO    | src.api.task_manager | 任务开始执行: task_id=f6d11c1f1ae0 来源=1787391629.json
+2026-08-22 18:38:16 | INFO    | src.main | 开始异步处理文件: /app/input/1787391629.json
+2026-08-22 18:38:16 | INFO    | src.core.export_parser | 解析会话[260818ZM精致河南省郑州市中牟县大孟镇融创观澜壹号三期6-2-1102]: 有效文本消息70条 过滤噪音消息1条 显式role标注71条 角色分布={'customer': 70} 未获响应70条
+2026-08-22 18:38:16 | INFO    | src.core.export_parser | 解析会话[260819W 精致母婴W上海闵行区浦锦]: 有效文本消息2条 过滤噪音消息0条 显式role标注2条 角色分布={'除醛师': 1, 'customer': 1} 未获响应2条
+2026-08-22 18:38:16 | INFO    | src.core.export_parser | 解析会话[260819ZM工装精致四川省成都市成华]: 有效文本消息3条 过滤噪音消息2条 显式role标注5条 角色分布={'sales': 2, 'customer': 1} 未获响应2条
+2026-08-22 18:38:16 | INFO    | src.core.export_parser | 解析会话[260820ZM 精致上海国贸虹桥璟上云河璟庭4幢6号801]: 有效文本消息83条 过滤噪音消息2条 显式role标注85条 角色分布={'customer': 78, 'eng_head': 5} 未获响应72条
+2026-08-22 18:38:16 | INFO    | src.core.export_parser | 解析会话[260820ZM 精致北京市西城区马连道东街甲2号院2号楼1502]: 有效文本消息22条 过滤噪音消息1条 显式role标注23条 角色分布={'customer': 22} 未获响应22条
+2026-08-22 18:38:16 | INFO    | src.core.export_parser | 解析会话[260822W精致母婴W海淀区太阳园6号楼东]: 有效文本消息2条 过滤噪音消息1条 显式role标注3条 角色分布={'除醛师': 1, 'customer': 1} 未获响应2条
+2026-08-22 18:38:16 | INFO    | src.core.export_parser | 解析会话[8.18高端北京市门头沟区京能西山印]: 有效文本消息14条 过滤噪音消息65条 显式role标注79条 角色分布={'customer': 14} 未获响应14条
+2026-08-22 18:38:16 | INFO    | src.core.export_parser | 解析会话[8.25高端 北京市西城区阳光丽景北]: 有效文本消息8条 过滤噪音消息3条 显式role标注11条 角色分布={'除醛师': 4, 'customer': 4} 未获响应2条
+2026-08-22 18:38:16 | INFO    | src.core.export_parser | 解析会话[LR26.8.18 精致 丰台区钟萃路 3 号院 2号楼2单元1301]: 有效文本消息4条 过滤噪音消息0条 显式role标注4条 角色分布={'customer': 4} 未获响应4条
+2026-08-22 18:38:16 | INFO    | src.core.export_parser | 解析会话[LR26.8.19精致 西城区东绒线胡同54号院内106室]: 有效文本消息5条 过滤噪音消息1条 显式role标注6条 角色分布={'eng_head': 3, 'customer': 2} 未获响应1条
+2026-08-22 18:38:16 | INFO    | src.core.export_parser | 解析会话[LR26.8.22 精致 河北省承德市双桥区鼎峰·中瑞城38号楼2单元303]: 有效文本消息7条 过滤噪音消息2条 显式role标注9条 角色分布={'customer': 7} 未获响应7条
+2026-08-22 18:38:16 | INFO    | src.core.export_parser | 解析会话[LR26.8.23 高端 朝阳区小红门路朝阳·中建星光里5号楼1单元1702]: 有效文本消息11条 过滤噪音消息2条 显式role标注13条 角色分布={'customer': 11} 未获响应11条
+2026-08-22 18:38:16 | INFO    | src.core.export_parser | 解析会话[企业微信团队]: 有效文本消息1条 过滤噪音消息0条 显式role标注1条 角色分布={'customer': 1} 未获响应1条
+2026-08-22 18:38:16 | INFO    | src.main | 会话[260818ZM精致河南省郑州市中牟县大孟镇融创观澜壹号三期6-2-1102] 进入LLM判定路径: 规则引擎预判=未触发 消息70条
+2026-08-22 18:38:16 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息70条 对话记录长度=13143字符
+2026-08-22 18:38:16 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共14123字符)
+2026-08-22 18:38:33 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=f6d11c1f1ae0 status=running
+2026-08-22 18:38:52 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:38:52 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=36498ms 响应长度=119字符
+2026-08-22 18:38:52 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=construction_timeout 判定耗时=36534ms 依据=客户发送了'主卧，客厅，儿童房，次卧'等现场施工/上门作业区域相关内容，且后续聊天记录中无工作人员回应。
+2026-08-22 18:38:52 | INFO    | src.main | 会话[260818ZM精致河南省郑州市中牟县大孟镇融创观澜壹号三期6-2-1102] LLM判定(construction_timeout)与规则引擎预判(未触发)不一致, 以LLM为准
+2026-08-22 18:38:52 | INFO    | src.main | 会话[260818ZM精致河南省郑州市中牟县大孟镇融创观澜壹号三期6-2-1102] 应用LLM判定响应: trigger=construction_timeout 响应1条 at=['@销售'] reply=师傅可能正在工作，我们已经提醒师傅尽快联系您~
+2026-08-22 18:38:52 | INFO    | src.main | 会话[260819W 精致母婴W上海闵行区浦锦] 进入LLM判定路径: 规则引擎预判=未触发 消息2条
+2026-08-22 18:38:52 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息2条 对话记录长度=191字符
+2026-08-22 18:38:52 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1103字符)
+2026-08-22 18:39:02 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:39:02 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=9332ms 响应长度=81字符
+2026-08-22 18:39:02 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=9333ms) 依据=工作人员已发送上门安排及注意事项通知，客户回复表情确认知晓，属于客户自己确认结束，无未响应诉求。
+2026-08-22 18:39:02 | INFO    | src.main | 会话[260819W 精致母婴W上海闵行区浦锦] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 18:39:02 | INFO    | src.main | 会话[260819ZM工装精致四川省成都市成华] 进入LLM判定路径: 规则引擎预判=未触发 消息3条
+2026-08-22 18:39:02 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息13条 对话记录长度=569字符
+2026-08-22 18:39:02 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1492字符)
+2026-08-22 18:39:12 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=f6d11c1f1ae0 status=running
+2026-08-22 18:39:12 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:39:12 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=10653ms 响应长度=132字符
+2026-08-22 18:39:12 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=appointment_timeout 判定耗时=10654ms 依据=客户最后一条消息'有变动，先暂停哈'涉及预约/上门时间的变动，且该消息之后无任何工作人员回应，符合appointment_timeout触发条件
+2026-08-22 18:39:12 | INFO    | src.main | 会话[260819ZM工装精致四川省成都市成华] LLM判定(appointment_timeout)与规则引擎预判(未触发)不一致, 以LLM为准
+2026-08-22 18:39:12 | INFO    | src.main | 会话[260819ZM工装精致四川省成都市成华] 应用LLM判定响应: trigger=appointment_timeout 响应1条 at=['@师傅'] reply=师傅可能正在工作，我们已经提醒师傅尽快联系您~
+2026-08-22 18:39:12 | INFO    | src.main | 会话[260820ZM 精致上海国贸虹桥璟上云河璟庭4幢6号801] 触发: type=construction_timeout intent=construction score=5.0 触发消息=换个说法，除醛结束后，复检结束后，我不保洁，是不是也可以直接入住
+2026-08-22 18:39:12 | INFO    | src.main | 会话[260820ZM 精致上海国贸虹桥璟上云河璟庭4幢6号801] 进入LLM判定路径: 规则引擎预判=construction_timeout 消息83条
+2026-08-22 18:39:12 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息84条 对话记录长度=4636字符
+2026-08-22 18:39:12 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共5630字符)
+2026-08-22 18:40:09 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=f6d11c1f1ae0 status=running
+2026-08-22 18:40:10 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=f6d11c1f1ae0 status=running
+2026-08-22 18:40:11 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=f6d11c1f1ae0 status=running
+2026-08-22 18:40:12 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=f6d11c1f1ae0 status=running
+2026-08-22 18:40:34 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=f6d11c1f1ae0 status=running
+2026-08-22 18:40:51 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:40:51 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=99092ms 响应长度=117字符
+2026-08-22 18:40:51 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=appointment_timeout 判定耗时=99093ms 依据=客户发送确认保洁上门时间相关内容，且之后无工作人员回应（后续消息发送者'室内空气治理'角色标注为客户，非工作人员）
+2026-08-22 18:40:51 | INFO    | src.main | 会话[260820ZM 精致上海国贸虹桥璟上云河璟庭4幢6号801] LLM判定(appointment_timeout)与规则引擎预判(construction_timeout)不一致, 以LLM为准
+2026-08-22 18:40:51 | INFO    | src.main | 会话[260820ZM 精致上海国贸虹桥璟上云河璟庭4幢6号801] 应用LLM判定响应: trigger=appointment_timeout 响应1条 at=['@师傅'] reply=师傅可能正在工作，我们已经提醒师傅尽快联系您~
+2026-08-22 18:40:51 | INFO    | src.main | 会话[260820ZM 精致北京市西城区马连道东街甲2号院2号楼1502] 触发: type=construction_timeout intent=construction score=4.0 触发消息=那治理后多久可以入住
+2026-08-22 18:40:51 | INFO    | src.main | 会话[260820ZM 精致北京市西城区马连道东街甲2号院2号楼1502] 进入LLM判定路径: 规则引擎预判=construction_timeout 消息22条
+2026-08-22 18:40:51 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息22条 对话记录长度=1154字符
+2026-08-22 18:40:51 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共2086字符)
+2026-08-22 18:42:15 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=f6d11c1f1ae0 status=running
+2026-08-22 18:42:16 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:42:16 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=85803ms 响应长度=131字符
+2026-08-22 18:42:16 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=85805ms) 依据=客户在18:34:27发送'九点吧'是对之前协商的上门时间的确认，属于客户自己确认结束的情况；且最后一条消息由徐辰(customer)发出，非工作人员，根据规则判为none
+2026-08-22 18:42:16 | INFO    | src.main | 会话[260820ZM 精致北京市西城区马连道东街甲2号院2号楼1502] 规则引擎曾触发(construction_timeout), 但LLM判定无需回复, 不回复
+2026-08-22 18:42:16 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] 进入LLM判定路径: 规则引擎预判=未触发 消息2条
+2026-08-22 18:42:16 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息2条 对话记录长度=134字符
+2026-08-22 18:42:16 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1046字符)
+2026-08-22 18:42:16 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=f6d11c1f1ae0 status=running
+2026-08-22 18:42:17 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=f6d11c1f1ae0 status=running
+2026-08-22 18:42:18 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=f6d11c1f1ae0 status=running
+2026-08-22 18:42:27 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:42:27 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=11473ms 响应长度=105字符
+2026-08-22 18:42:27 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=appointment_timeout 判定耗时=11475ms 依据=客户孙振龙发送了确认上门时间的消息（暂定上午8点半），且该消息之后没有工作人员的后续回应。
+2026-08-22 18:42:27 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] LLM判定(appointment_timeout)与规则引擎预判(未触发)不一致, 以LLM为准
+2026-08-22 18:42:27 | INFO    | src.main | 会话[260822W精致母婴W海淀区太阳园6号楼东] 应用LLM判定响应: trigger=appointment_timeout 响应1条 at=['@师傅'] reply=师傅可能正在工作，我们已经提醒师傅尽快联系您~
+2026-08-22 18:42:27 | INFO    | src.main | 会话[8.18高端北京市门头沟区京能西山印] 触发: type=construction_timeout intent=construction score=8.0 触发消息=【治理后】：1.密闭门窗12-24小时 2.密闭12小时后，开窗通风三天（务必） 3.通风三到五天后用湿毛巾擦拭我们所治理过的家具表面 4.治理后第五天提前预约...(共245字符)
+2026-08-22 18:42:27 | INFO    | src.main | 会话[8.18高端北京市门头沟区京能西山印] 进入LLM判定路径: 规则引擎预判=construction_timeout 消息14条
+2026-08-22 18:42:27 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息16条 对话记录长度=1209字符
+2026-08-22 18:42:27 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共2135字符)
+2026-08-22 18:42:54 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:42:54 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=26805ms 响应长度=75字符
+2026-08-22 18:42:54 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=26806ms) 依据=最后一条消息由客户发送“好”，属于客户自己确认结束对话，无需智能体回复。
+2026-08-22 18:42:54 | INFO    | src.main | 会话[8.18高端北京市门头沟区京能西山印] 规则引擎曾触发(construction_timeout), 但LLM判定无需回复, 不回复
+2026-08-22 18:42:54 | INFO    | src.main | 会话[8.25高端 北京市西城区阳光丽景北] 进入LLM判定路径: 规则引擎预判=未触发 消息8条
+2026-08-22 18:42:54 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息8条 对话记录长度=861字符
+2026-08-22 18:42:54 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1779字符)
+2026-08-22 18:43:24 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:43:24 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=29941ms 响应长度=135字符
+2026-08-22 18:43:24 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=29944ms) 依据=LCY在18:22:30发送了预约时间相关内容，但工作人员（除醛师）在18:23:32已做出回应，且LCY最后一条消息回复'好的收到'属于客户确认结束，诉求已被响应，判为none。
+2026-08-22 18:43:24 | INFO    | src.main | 会话[8.25高端 北京市西城区阳光丽景北] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 18:43:24 | INFO    | src.main | 会话[LR26.8.18 精致 丰台区钟萃路 3 号院 2号楼2单元1301] 进入LLM判定路径: 规则引擎预判=未触发 消息4条
+2026-08-22 18:43:24 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息4条 对话记录长度=191字符
+2026-08-22 18:43:24 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1105字符)
+2026-08-22 18:43:40 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:43:40 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=16192ms 响应长度=175字符
+2026-08-22 18:43:40 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=appointment_timeout 判定耗时=16193ms 依据=最后一条消息由客户lth发出，内容为'到了'，属于上门到达相关内容。该消息之后无任何工作人员回应（除醛师霍建顺虽名字像工作人员，但角色标注为customer，不算工作人员回应），符合appointment_timeout触发条件。
+2026-08-22 18:43:40 | INFO    | src.main | 会话[LR26.8.18 精致 丰台区钟萃路 3 号院 2号楼2单元1301] LLM判定(appointment_timeout)与规则引擎预判(未触发)不一致, 以LLM为准
+2026-08-22 18:43:40 | INFO    | src.main | 会话[LR26.8.18 精致 丰台区钟萃路 3 号院 2号楼2单元1301] 应用LLM判定响应: trigger=appointment_timeout 响应1条 at=['@师傅'] reply=师傅可能正在工作，我们已经提醒师傅尽快联系您~
+2026-08-22 18:43:40 | INFO    | src.main | 会话[LR26.8.19精致 西城区东绒线胡同54号院内106室] 进入LLM判定路径: 规则引擎预判=未触发 消息5条
+2026-08-22 18:43:40 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息6条 对话记录长度=355字符
+2026-08-22 18:43:40 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1271字符)
+2026-08-22 18:43:54 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:43:54 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=14020ms 响应长度=84字符
+2026-08-22 18:43:54 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=14021ms) 依据=最后一条消息由工作人员发出，且工作人员已对客户的消息进行了回应，不存在无人回应的超时情况。
+2026-08-22 18:43:54 | INFO    | src.main | 会话[LR26.8.19精致 西城区东绒线胡同54号院内106室] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 18:43:54 | INFO    | src.main | 会话[LR26.8.22 精致 河北省承德市双桥区鼎峰·中瑞城38号楼2单元303] 触发: type=construction_timeout intent=construction score=12.0 触发消息=感谢您选择清新全家进行治理\n这个是咱们后续的专属服务群，此群不会解散，您后续有任何问题都可以群内进行沟通\n群内有咱们各个部门的负责人员\n我是除醛顾问，负责...(共224字符)
+2026-08-22 18:43:54 | INFO    | src.main | 会话[LR26.8.22 精致 河北省承德市双桥区鼎峰·中瑞城38号楼2单元303] 进入LLM判定路径: 规则引擎预判=construction_timeout 消息7条
+2026-08-22 18:43:54 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息26条 对话记录长度=879字符
+2026-08-22 18:43:54 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共1815字符)
+2026-08-22 18:44:06 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=f6d11c1f1ae0 status=running
+2026-08-22 18:44:07 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=f6d11c1f1ae0 status=running
+2026-08-22 18:44:47 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:44:47 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=54578ms 响应长度=162字符
+2026-08-22 18:44:47 | INFO    | src.llm.llm_client | LLM全量判定命中: trigger=appointment_timeout 判定耗时=54579ms 依据=客户李晓建在17:41:45发送确认上门时间相关内容（'22号上午11点左右我可以到'），之后仅有其他客户茱丽.耶回复'好的，没问题'，无工作人员回应，符合appointment_timeout触发条件。
+2026-08-22 18:44:47 | INFO    | src.main | 会话[LR26.8.22 精致 河北省承德市双桥区鼎峰·中瑞城38号楼2单元303] LLM判定(appointment_timeout)与规则引擎预判(construction_timeout)不一致, 以LLM为准
+2026-08-22 18:44:47 | INFO    | src.main | 会话[LR26.8.22 精致 河北省承德市双桥区鼎峰·中瑞城38号楼2单元303] 应用LLM判定响应: trigger=appointment_timeout 响应1条 at=['@师傅'] reply=师傅可能正在工作，我们已经提醒师傅尽快联系您~
+2026-08-22 18:44:47 | INFO    | src.main | 会话[LR26.8.23 高端 朝阳区小红门路朝阳·中建星光里5号楼1单元1702] 触发: type=construction_timeout intent=construction score=12.0 触发消息=感谢您选择清新全家进行治理\n这个是咱们后续的专属服务群，此群不会解散，您后续有任何问题都可以群内进行沟通\n群内有咱们各个部门的负责人员\n我是除醛顾问，负责...(共236字符)
+2026-08-22 18:44:47 | INFO    | src.main | 会话[LR26.8.23 高端 朝阳区小红门路朝阳·中建星光里5号楼1单元1702] 进入LLM判定路径: 规则引擎预判=construction_timeout 消息11条
+2026-08-22 18:44:47 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息30条 对话记录长度=1119字符
+2026-08-22 18:44:47 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共2059字符)
+2026-08-22 18:45:13 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=f6d11c1f1ae0 status=running
+2026-08-22 18:45:15 | WARNING | src.api.app | 结果查询拒绝: 任务未完成 task_id=f6d11c1f1ae0 status=running
+2026-08-22 18:45:20 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:45:20 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=33105ms 响应长度=79字符
+2026-08-22 18:45:20 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=33106ms) 依据=最后一条消息为客户回复“好的”，属于客户自己确认结束，判为none。
+2026-08-22 18:45:20 | INFO    | src.main | 会话[LR26.8.23 高端 朝阳区小红门路朝阳·中建星光里5号楼1单元1702] 规则引擎曾触发(construction_timeout), 但LLM判定无需回复, 不回复
+2026-08-22 18:45:20 | INFO    | src.main | 会话[企业微信团队] 进入LLM判定路径: 规则引擎预判=未触发 消息1条
+2026-08-22 18:45:20 | INFO    | src.llm.llm_client | LLM全量会话判定开始: 消息1条 对话记录长度=54字符
+2026-08-22 18:45:20 | INFO    | src.llm.llm_client | LLM请求开始(异步): model=qwen3.7-plus messages=1条 首条内容=你是企业微信售后服务群的智能客服助手。以下是某客户服务群的完整聊天记录(消息已处于最近3-7分钟窗口内)。请判断智能体是否应该回复，属于哪一类触发。\n\n触发类别 (只能是以下之一或 none):\n1. booking: 销售发送了包含...(共965字符)
+2026-08-22 18:45:28 | INFO    | httpx | HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-22 18:45:28 | INFO    | src.llm.llm_client | LLM响应成功(异步): 耗时=8246ms 响应长度=106字符
+2026-08-22 18:45:28 | INFO    | src.llm.llm_client | LLM全量判定: 无需回复 (trigger=none, 判定耗时=8249ms) 依据=消息为企业微信团队发送的版本新功能介绍，属于系统通知/无关内容，不涉及预约、合同、施工、药剂或订单信息，不属于任何触发类别
+2026-08-22 18:45:28 | INFO    | src.main | 会话[企业微信团队] 规则引擎与LLM判定一致: 无需回复
+2026-08-22 18:45:28 | INFO    | src.main | 文件处理完成: /app/input/1787391629.json 耗时=435852ms
+2026-08-22 18:45:28 | INFO    | src.api.task_manager | 任务结果已落盘: task_id=f6d11c1f1ae0 -> /app/output/1787391629_result.json
+2026-08-22 18:45:28 | INFO    | src.api.task_manager | 任务执行成功: task_id=f6d11c1f1ae0 耗时=435872ms summary={'total': 13, 'triggered': 6} output=/app/output/1787391629_result.json
+2026-08-24 22:47:23 | INFO    | src.api.app | 服务启动: input_dir=/app/input output_dir=/app/output watcher.enabled=True
+2026-08-24 22:47:24 | INFO    | src.llm.llm_client | LLM配置加载完成: enabled=True provider=openai_compatible model=qwen3.7-plus base_url=https://dashscope.aliyuncs.com/compatible-mode/v1 api_key=已配置 temperature=0.5 max_tokens=512 timeout=120s retries=2
+2026-08-24 22:47:24 | INFO    | src.api.app | 输入文件夹监听已启动: /app/input -> http://127.0.0.1:8000
+2026-08-24 22:47:24 | INFO    | src.watcher | 开始监听输入文件夹: /app/input (间隔 2.0s)

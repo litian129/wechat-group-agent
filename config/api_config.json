@@ -1,0 +1,12 @@
+{
+  "host": "127.0.0.1",
+  "port": 8000,
+  "input_dir": "input",
+  "output_dir": "output",
+  "log_level": "INFO",
+  "watcher": {
+    "enabled": true,
+    "poll_interval_seconds": 2,
+    "api_base_url": ""
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "source_file": "/app/input/1787389187.json",
+  "summary": {
+    "total": 2,
+    "triggered": 0
+  },
+  "sessions": [
+    {
+      "group_name": "260822W精致母婴W海淀区太阳园6号楼东",
+      "triggered": false,
+      "trigger_type": null,
+      "responses": [],
+      "llm_judge": {
+        "trigger": "none"
+      }
+    },
+    {
+      "group_name": "Poplar 杨",
+      "triggered": false,
+      "trigger_type": null,
+      "responses": [],
+      "llm_judge": {
+        "trigger": "none"
+      }
+    }
+  ]
+}

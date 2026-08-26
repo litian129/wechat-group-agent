@@ -1,0 +1,14 @@
+{
+  "group_name": "清新全家-李天浩-除醛服务群",
+  "messages": [
+    {
+      "userid": "李天浩",
+      "role": "客户",
+      "content": "哦，忘了，我明天上午有事，明嗯，十十十点以后可以吗？",
+      "timestamp": "2026-08-18T10:05:00",
+      "msgid": "msg_007",
+      "is_last_in_window": true,
+      "has_response_after": true
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "source_file": "/app/input/1787380370.json",
+  "summary": {
+    "total": 2,
+    "triggered": 1
+  },
+  "sessions": [
+    {
+      "group_name": "260819ZM工装精致四川省成都市成华",
+      "triggered": true,
+      "trigger_type": "appointment_timeout",
+      "responses": [
+        {
+          "at_target": [
+            "@师傅"
+          ],
+          "content": "好的，收到您的变动需求。已提醒师傅尽快与您联系确认后续安排，请您稍等。",
+          "generated_by": "llm"
+        }
+      ]
+    },
+    {
+      "group_name": "8.18高端北京市门头沟区京能西山印",
+      "triggered": false,
+      "trigger_type": null,
+      "responses": []
+    }
+  ]
+}

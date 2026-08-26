@@ -1,0 +1,153 @@
+{
+  "source_file": "/app/input/1787390224.json",
+  "summary": {
+    "total": 13,
+    "triggered": 3
+  },
+  "sessions": [
+    {
+      "group_name": "260818ZM精致河南省郑州市中牟县大孟镇融创观澜壹号三期6-2-1102",
+      "triggered": false,
+      "trigger_type": null,
+      "responses": [],
+      "llm_judge": {
+        "trigger": "none"
+      }
+    },
+    {
+      "group_name": "260819W 精致母婴W上海闵行区浦锦",
+      "triggered": false,
+      "trigger_type": null,
+      "responses": [],
+      "llm_judge": {
+        "trigger": "none"
+      }
+    },
+    {
+      "group_name": "260819ZM工装精致四川省成都市成华",
+      "triggered": true,
+      "trigger_type": "appointment_timeout",
+      "responses": [
+        {
+          "at_target": [
+            "@师傅"
+          ],
+          "content": "师傅可能正在工作，我们已经提醒师傅尽快联系您~",
+          "generated_by": "llm"
+        }
+      ],
+      "llm_judge": {
+        "trigger": "appointment_timeout",
+        "reason": "最后一条消息提到预约时间有变动需要暂停，属于改期/预约上门相关内容，且该消息之后无人回应。"
+      }
+    },
+    {
+      "group_name": "260820ZM 精致上海国贸虹桥璟上云河璟庭4幢6号801",
+      "triggered": false,
+      "trigger_type": null,
+      "responses": [],
+      "llm_judge": {
+        "trigger": "none"
+      }
+    },
+    {
+      "group_name": "260820ZM 精致北京市西城区马连道东街甲2号院2号楼1502",
+      "triggered": false,
+      "trigger_type": null,
+      "responses": [],
+      "llm_judge": {
+        "trigger": "none"
+      }
+    },
+    {
+      "group_name": "260822W精致母婴W海淀区太阳园6号楼东",
+      "triggered": true,
+      "trigger_type": "appointment_timeout",
+      "responses": [
+        {
+          "at_target": [
+            "@师傅"
+          ],
+          "content": "师傅可能正在工作，我们已经提醒师傅尽快联系您~",
+          "generated_by": "llm"
+        }
+      ],
+      "llm_judge": {
+        "trigger": "appointment_timeout",
+        "reason": "客户孙振龙发送了确认上门时间的消息（暂定上午8点半），属于预约上门/确认上门时间相关内容，且该消息之后无其他成员回应，符合appointment_timeout触发条件。"
+      }
+    },
+    {
+      "group_name": "8.18高端北京市门头沟区京能西山印",
+      "triggered": false,
+      "trigger_type": null,
+      "responses": [],
+      "llm_judge": {
+        "trigger": "none"
+      }
+    },
+    {
+      "group_name": "8.25高端 北京市西城区阳光丽景北",
+      "triggered": false,
+      "trigger_type": null,
+      "responses": [],
+      "llm_judge": {
+        "trigger": "none"
+      }
+    },
+    {
+      "group_name": "LR26.8.18 精致 丰台区钟萃路 3 号院 2号楼2单元1301",
+      "triggered": true,
+      "trigger_type": "construction_timeout",
+      "responses": [
+        {
+          "at_target": [
+            "@销售"
+          ],
+          "content": "师傅可能正在工作，我们已经提醒师傅尽快联系您~",
+          "generated_by": "llm"
+        }
+      ],
+      "llm_judge": {
+        "trigger": "construction_timeout",
+        "reason": "客户发送到达现场（上门作业相关）的消息，且之后无其他成员回应。"
+      }
+    },
+    {
+      "group_name": "LR26.8.19精致 西城区东绒线胡同54号院内106室",
+      "triggered": false,
+      "trigger_type": null,
+      "responses": [],
+      "llm_judge": {
+        "trigger": "none"
+      }
+    },
+    {
+      "group_name": "LR26.8.22 精致 河北省承德市双桥区鼎峰·中瑞城38号楼2单元303",
+      "triggered": false,
+      "trigger_type": null,
+      "responses": [],
+      "llm_judge": {
+        "trigger": "none"
+      }
+    },
+    {
+      "group_name": "LR26.8.23 高端 朝阳区小红门路朝阳·中建星光里5号楼1单元1702",
+      "triggered": false,
+      "trigger_type": null,
+      "responses": [],
+      "llm_judge": {
+        "trigger": "none"
+      }
+    },
+    {
+      "group_name": "企业微信团队",
+      "triggered": false,
+      "trigger_type": null,
+      "responses": [],
+      "llm_judge": {
+        "trigger": "none"
+      }
+    }
+  ]
+}

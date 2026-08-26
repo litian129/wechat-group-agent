@@ -1,0 +1,15 @@
+{
+  "role_mapping": {
+    "销售": "sales",
+    "sale": "sales",
+    "师傅": "master",
+    "master": "master",
+    "工程部负责人": "eng_head",
+    "工程负责人": "eng_head",
+    "内部其他人": "internal",
+    "内部": "internal",
+    "客户": "customer"
+  },
+  "default_role": "internal",
+  "default_external_role": "customer"
+}

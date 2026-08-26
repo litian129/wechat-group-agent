@@ -1,0 +1,29 @@
+{
+  "masters": [
+    {
+      "master_id": "huo_master",
+      "display_name": "霍师傅",
+      "phone": "15120069954",
+      "wechat_name": "霍师傅",
+      "service_area": "北京",
+      "specialties": ["除醛治理", "检测服务"]
+    },
+    {
+      "master_id": "li_master",
+      "display_name": "李师傅",
+      "phone": "13800001234",
+      "wechat_name": "李师傅",
+      "service_area": "北京",
+      "specialties": ["除醛治理", "光触媒"]
+    }
+  ],
+  "customer_service": {
+    "name": "除醛顾问",
+    "phone": "13051910152"
+  },
+  "engineering_manager": {
+    "name": "陈经理",
+    "phone": "17610380712",
+    "role": "工程部负责人"
+  }
+}

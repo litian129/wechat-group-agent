@@ -1,0 +1,4 @@
+# 企业微信群聊智能体 - 服务化依赖
+fastapi>=0.110
+uvicorn[standard]>=0.29
+httpx>=0.27

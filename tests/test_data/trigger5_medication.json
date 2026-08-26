@@ -1,0 +1,14 @@
+{
+  "group_name": "清新全家-李天浩-除醛服务群",
+  "messages": [
+    {
+      "userid": "李天浩",
+      "role": "客户",
+      "content": "我有个疑问，甲醛无色无味，所以即使催化了，快速释放也是没有味道的，现在房间的味道为啥那么大呢",
+      "timestamp": "2026-08-18T15:08:00",
+      "msgid": "msg_005",
+      "is_last_in_window": true,
+      "has_response_after": false
+    }
+  ]
+}

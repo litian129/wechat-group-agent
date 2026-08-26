@@ -1,0 +1,24 @@
+# 版本管理与缓存
+.git/
+.gitignore
+__pycache__/
+*.pyc
+*.pyo
+.idea/
+.vscode/
+
+# 运行期数据 (通过卷挂载提供)
+input/
+output/
+state/
+
+# 测试与文档
+tests/
+project-docs/
+project-specs/
+README.md
+
+# Docker 自身文件
+Dockerfile
+.dockerignore
+docker-compose.yml

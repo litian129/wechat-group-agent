@@ -1,0 +1,21 @@
+{
+  "source_file": "/app/input/1787377777.json",
+  "summary": {
+    "total": 2,
+    "triggered": 0
+  },
+  "sessions": [
+    {
+      "group_name": "260819ZM工装精致四川省成都市成华",
+      "triggered": false,
+      "trigger_type": null,
+      "responses": []
+    },
+    {
+      "group_name": "8.18高端北京市门头沟区京能西山印",
+      "triggered": false,
+      "trigger_type": null,
+      "responses": []
+    }
+  ]
+}
