@@ -2,7 +2,7 @@
   "enabled": true,
   "provider": "openai_compatible",
   "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
-  "api_key": "sk-ws-H.REEHXYD.rn93.MEUCIQC1fp8av47uq1q-kw9O3Fo5iFBf4AvXUE4eRV0Mj6Lg0QIgMGQSmfTZS9bcvrdw6-SUzLL7UUL_TWXh-XZ10sMsRu0",
+  "api_key": "",
   "model": "qwen3.7-plus",
   "temperature": 0.5,
   "max_tokens": 512,
